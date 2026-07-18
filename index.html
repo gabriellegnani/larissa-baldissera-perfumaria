@@ -145,6 +145,15 @@ header.scrolled .brand img{width:36px;height:36px}
 .pyramid-diagram .outline{fill:none;stroke:var(--line);stroke-width:1.5}
 .pyramid-diagram .divider{stroke:var(--line);stroke-width:1}
 .pyramid-diagram .band{opacity:.08;filter:drop-shadow(0 0 0 transparent)}
+/* identificação do produto retratado nesta pirâmide */
+.pyramid-product{
+  position:absolute;left:50%;top:10%;transform:translateX(-50%);
+  text-align:center;opacity:0;z-index:2;
+}
+.pyramid-product-brand{
+  display:block;margin-top:8px;font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.3rem;color:rgba(246,241,231,.8);
+}
 /* textos das camadas */
 .pyramid-copy{position:absolute;left:50%;top:70%;transform:translateX(-50%);text-align:center;width:min(520px,86vw)}
 .pyramid-copy .tier{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(24px)}
@@ -216,6 +225,29 @@ header.scrolled .brand img{width:36px;height:36px}
 .brand-row h3{font-size:clamp(1.5rem,2.6vw,2.2rem)}
 .brand-row .note-txt{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(246,241,231,.5)}
 
+.colecao{position:relative;z-index:2;padding:140px 0}
+.colecao-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
+.colecao-card{background:var(--navy);padding:44px 34px;position:relative;min-height:190px;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(36px)}
+.colecao-card.inview{opacity:1;transform:translateY(0);transition:opacity .9s,transform .9s}
+.colecao-card.filled{background:linear-gradient(175deg,var(--navy),var(--navy-2))}
+.colecao-card.filled::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.colecao-brand{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+.colecao-card h3{font-size:1.7rem;margin-bottom:14px}
+.colecao-note{font-size:.68rem;letter-spacing:.16em;color:rgba(246,241,231,.55);display:block;margin-bottom:26px}
+.colecao-cta{
+  display:inline-flex;align-items:center;gap:14px;align-self:flex-start;
+  font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-2);
+}
+.colecao-cta .stroke{display:inline-block;width:32px;height:1px;background:var(--gold);transition:width .4s ease}
+.colecao-cta:hover .stroke{width:52px}
+.colecao-card.empty{
+  align-items:center;text-align:center;border:1px dashed rgba(201,164,92,.22);
+  background:transparent;
+}
+.colecao-card.empty span{
+  font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(246,241,231,.32);
+}
+
 .kits{position:relative;z-index:2;padding:140px 0}
 .kit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
 .kit{background:var(--navy);padding:56px 40px;position:relative;overflow:hidden;opacity:0;transform:translateY(36px)}
@@ -262,6 +294,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .navlinks{display:none}
   .act-meter{right:18px}
   .kit-grid{grid-template-columns:1fr}
+  .colecao-grid{grid-template-columns:1fr}
   .loja-grid{grid-template-columns:1fr;gap:50px}
   .brand-row{grid-template-columns:44px 1fr;gap:16px}
   .brand-row .note-txt{display:none}
@@ -272,6 +305,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .hero-pin{position:relative;height:auto;padding:140px 0}
   .pyramid{height:auto}
   .pyramid-pin{position:relative;height:auto;padding:120px 0}
+  .pyramid-product{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px;opacity:1}
   .pyramid-diagram{position:relative;display:block;left:auto;top:auto;transform:none;margin:0 auto 40px;opacity:1}
   .pyramid-copy{position:relative;left:auto;top:auto;transform:none;margin:0 auto}
   .pyramid-meter{display:none}
@@ -297,6 +331,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
     <div class="navlinks">
       <a href="#experiencia">A Experiência</a>
       <a href="#marcas">Maisons</a>
+      <a href="#colecao">Coleção</a>
       <a href="#kits">Presentes</a>
       <a href="#loja">A Loja</a>
       <a class="nav-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">WhatsApp</a>
@@ -361,21 +396,26 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <polygon class="band" id="bandFundo" points="56.67,196.67 243.33,196.67 290,290 10,290" fill="url(#pyGold)"/>
     </svg>
 
+    <div class="pyramid-product">
+      <span class="eyebrow">Good Girl</span>
+      <span class="pyramid-product-brand">Carolina Herrera</span>
+    </div>
+
     <div class="pyramid-copy">
       <div class="tier" id="tierTopo">
         <span class="eyebrow">Notas de Topo</span>
-        <div class="n-name">Bergamota</div>
-        <div class="n-tag">Luminosa</div>
+        <div class="n-name">Amêndoa &amp; Café</div>
+        <div class="n-tag">Intrigante</div>
       </div>
       <div class="tier" id="tierCoracao">
         <span class="eyebrow">Notas de Coração</span>
-        <div class="n-name">Pimenta Rosa</div>
-        <div class="n-tag">Vibrante</div>
+        <div class="n-name">Jasmim &amp; Tuberosa</div>
+        <div class="n-tag">Sedutora</div>
       </div>
       <div class="tier" id="tierFundo">
         <span class="eyebrow">Notas de Fundo</span>
-        <div class="n-name">Baunilha</div>
-        <div class="n-tag">Envolvente</div>
+        <div class="n-name">Fava-tonca &amp; Cacau</div>
+        <div class="n-tag">Marcante</div>
       </div>
     </div>
 
@@ -437,6 +477,30 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <div class="brand-row"><span class="idx">Nº 03</span><h3>Valentino</h3><span class="note-txt">Born in Roma · Uomo</span></div>
       <div class="brand-row"><span class="idx">Nº 04</span><h3>Moschino</h3><span class="note-txt">Toy 2 Bubble Gum</span></div>
       <div class="brand-row"><span class="idx">Nº 05</span><h3>Zadig &amp; Voltaire</h3><span class="note-txt">This is Her · This is Him</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEÇÃO 4: COLEÇÃO (slots de produto) ===================== -->
+<section class="colecao" id="colecao">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Coleção</span>
+      <h2>Perfumes em <em>destaque</em></h2>
+      <p>Uma amostra da curadoria da Larissa — o catálogo completo é atualizado direto pelo WhatsApp.</p>
+    </div>
+    <div class="colecao-grid">
+      <div class="colecao-card filled">
+        <span class="colecao-brand">Carolina Herrera</span>
+        <h3>Good Girl</h3>
+        <span class="colecao-note">Amêndoa · Jasmim · Fava-tonca</span>
+        <a class="colecao-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">Consultar<span class="stroke"></span></a>
+      </div>
+      <div class="colecao-card empty"><span>Em breve</span></div>
+      <div class="colecao-card empty"><span>Em breve</span></div>
+      <div class="colecao-card empty"><span>Em breve</span></div>
+      <div class="colecao-card empty"><span>Em breve</span></div>
+      <div class="colecao-card empty"><span>Em breve</span></div>
     </div>
   </div>
 </section>
@@ -538,6 +602,7 @@ const io = new IntersectionObserver(es => {
 },{threshold:.18});
 document.querySelectorAll('.brand-row').forEach((el,i)=>{el.dataset.d=i*90;io.observe(el)});
 document.querySelectorAll('.kit').forEach((el,i)=>{el.dataset.d=i*130;io.observe(el)});
+document.querySelectorAll('.colecao-card').forEach((el,i)=>{el.dataset.d=i*100;io.observe(el)});
 document.querySelectorAll('.info-list li').forEach((el,i)=>{el.dataset.d=i*100;io.observe(el)});
 
 /* ---------- partículas douradas ambiente (dust), reutilizável entre seções ---------- */
@@ -674,6 +739,7 @@ if(!reduced && window.gsap){
   gsap.set(['#pyMist2'],{scale:1.55,opacity:.85});
   gsap.set(['#pyMist3'],{scale:1.85,opacity:.95});
   pyTl.fromTo('.pyramid-diagram',{opacity:0},{opacity:1,duration:.16},.05);
+  pyTl.fromTo('.pyramid-product',{opacity:0},{opacity:1,duration:.12},.08);
   pyTl.to('#pyMist1',{scale:0,opacity:0,duration:.2,ease:'power1.in'},0);
   pyTl.to('#pyMist2',{scale:0,opacity:0,duration:.18,ease:'power1.in'},.02);
   pyTl.to('#pyMist3',{scale:0,opacity:0,duration:.16,ease:'power1.in'},.04);
@@ -698,6 +764,7 @@ if(!reduced && window.gsap){
     trigger:'#notas',start:'top top',end:'bottom bottom',scrub:true}});
 }else{
   document.querySelector('.pyramid-diagram').style.opacity=1;
+  document.querySelector('.pyramid-product').style.opacity=1;
   document.querySelectorAll('.pyramid-copy .tier').forEach(el=>{
     el.style.opacity=1;el.style.position='relative';el.style.margin='0 auto 40px';el.style.transform='none';
   });
