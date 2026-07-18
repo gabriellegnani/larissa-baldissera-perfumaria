@@ -140,6 +140,12 @@ header.scrolled .brand img{width:36px;height:36px}
   background:radial-gradient(circle, rgba(201,164,92,.14), transparent 55%);
 }
 #pyramidDust{position:absolute;inset:0;pointer-events:none}
+/* dois lados: o frasco (ilustração original) e a pirâmide */
+.pyramid-split{position:absolute;inset:0;z-index:1;display:grid;grid-template-columns:1fr 1fr}
+.pyramid-bottle-col{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
+.pyramid-bottle-stage{perspective:1200px;width:min(220px,34vw)}
+#bottleSvg{width:100%;display:block;opacity:0;filter:drop-shadow(0 40px 70px rgba(0,0,0,.5));transform-style:preserve-3d}
+.pyramid-notes-col{position:relative;height:100%}
 /* diagrama: triângulo dividido em 3 faixas que se acendem conforme a pirâmide "desce" */
 .pyramid-diagram{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);width:min(170px,32vw);opacity:0}
 .pyramid-diagram .outline{fill:none;stroke:var(--line);stroke-width:1.5}
@@ -295,6 +301,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .act-meter{right:18px}
   .kit-grid{grid-template-columns:1fr}
   .colecao-grid{grid-template-columns:1fr}
+  .pyramid-split{grid-template-columns:1fr}
+  .pyramid-bottle-col{display:none}
   .loja-grid{grid-template-columns:1fr;gap:50px}
   .brand-row{grid-template-columns:44px 1fr;gap:16px}
   .brand-row .note-txt{display:none}
@@ -305,6 +313,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .hero-pin{position:relative;height:auto;padding:140px 0}
   .pyramid{height:auto}
   .pyramid-pin{position:relative;height:auto;padding:120px 0}
+  .pyramid-bottle-col{display:none}
+  #bottleSvg{opacity:1;transform:none!important}
   .pyramid-product{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px;opacity:1}
   .pyramid-diagram{position:relative;display:block;left:auto;top:auto;transform:none;margin:0 auto 40px;opacity:1}
   .pyramid-copy{position:relative;left:auto;top:auto;transform:none;margin:0 auto}
@@ -382,40 +392,79 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <div class="layer m3" id="pyMist3"></div>
     </div>
 
-    <svg class="pyramid-diagram" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="pyGold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
-        </linearGradient>
-      </defs>
-      <polygon class="outline" points="150,10 290,290 10,290"/>
-      <line class="divider" x1="103.33" y1="103.33" x2="196.67" y2="103.33"/>
-      <line class="divider" x1="56.67" y1="196.67" x2="243.33" y2="196.67"/>
-      <polygon class="band" id="bandTopo" points="150,10 196.67,103.33 103.33,103.33" fill="url(#pyGold)"/>
-      <polygon class="band" id="bandCoracao" points="103.33,103.33 196.67,103.33 243.33,196.67 56.67,196.67" fill="url(#pyGold)"/>
-      <polygon class="band" id="bandFundo" points="56.67,196.67 243.33,196.67 290,290 10,290" fill="url(#pyGold)"/>
-    </svg>
-
-    <div class="pyramid-product">
-      <span class="eyebrow">Good Girl</span>
-      <span class="pyramid-product-brand">Carolina Herrera</span>
-    </div>
-
-    <div class="pyramid-copy">
-      <div class="tier" id="tierTopo">
-        <span class="eyebrow">Notas de Topo</span>
-        <div class="n-name">Amêndoa &amp; Café</div>
-        <div class="n-tag">Intrigante</div>
+    <div class="pyramid-split">
+      <!-- lado A: ilustração original do frasco (silhueta inspirada no "sapatinho"),
+           gira lateralmente conforme o scroll -->
+      <div class="pyramid-bottle-col">
+        <div class="pyramid-bottle-stage" id="bottleStage">
+          <svg class="pyramid-bottle" id="bottleSvg" viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bottleGlass" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#2a2760"/><stop offset=".5" stop-color="#191740"/><stop offset="1" stop-color="#100e2c"/>
+              </linearGradient>
+              <linearGradient id="bottleGold" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e8d3a2"/><stop offset=".5" stop-color="#c9a45c"/><stop offset="1" stop-color="#8f713a"/>
+              </linearGradient>
+              <linearGradient id="bottleLiquid" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
+              </linearGradient>
+            </defs>
+            <!-- "salto": curva inspirada em silhueta de sapatinho, saindo da base do frasco -->
+            <path d="M148,270 C176,282 198,318 192,362 C190,376 180,384 168,380 C160,377 158,367 161,354 C167,326 156,300 132,278 Z" fill="url(#bottleGold)" opacity=".92"/>
+            <!-- "sola": linha fina sob o corpo, ecoando a sola de um sapato -->
+            <path d="M80,272 C104,282 148,282 168,270" fill="none" stroke="url(#bottleGold)" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+            <!-- tampa -->
+            <rect x="98" y="16" width="44" height="30" rx="6" fill="url(#bottleGold)"/>
+            <!-- gargalo -->
+            <rect x="106" y="46" width="28" height="22" rx="2" fill="url(#bottleGold)"/>
+            <!-- corpo de vidro -->
+            <path d="M88,68 C88,68 152,68 152,68 L160,232 C160,254 146,268 120,268 C94,268 80,254 80,232 Z" fill="url(#bottleGlass)" stroke="rgba(201,164,92,.5)" stroke-width="1.5"/>
+            <!-- líquido -->
+            <path d="M84,178 L156,178 L158,232 C158,251 144,264 120,264 C96,264 82,251 82,232 Z" fill="url(#bottleLiquid)" opacity=".88"/>
+            <!-- reflexo -->
+            <path d="M98,80 C94,130 93,200 97,250" stroke="rgba(246,241,231,.35)" stroke-width="6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
       </div>
-      <div class="tier" id="tierCoracao">
-        <span class="eyebrow">Notas de Coração</span>
-        <div class="n-name">Jasmim &amp; Tuberosa</div>
-        <div class="n-tag">Sedutora</div>
-      </div>
-      <div class="tier" id="tierFundo">
-        <span class="eyebrow">Notas de Fundo</span>
-        <div class="n-name">Fava-tonca &amp; Cacau</div>
-        <div class="n-tag">Marcante</div>
+
+      <!-- lado B: a pirâmide olfativa -->
+      <div class="pyramid-notes-col">
+        <svg class="pyramid-diagram" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pyGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
+            </linearGradient>
+          </defs>
+          <polygon class="outline" points="150,10 290,290 10,290"/>
+          <line class="divider" x1="103.33" y1="103.33" x2="196.67" y2="103.33"/>
+          <line class="divider" x1="56.67" y1="196.67" x2="243.33" y2="196.67"/>
+          <polygon class="band" id="bandTopo" points="150,10 196.67,103.33 103.33,103.33" fill="url(#pyGold)"/>
+          <polygon class="band" id="bandCoracao" points="103.33,103.33 196.67,103.33 243.33,196.67 56.67,196.67" fill="url(#pyGold)"/>
+          <polygon class="band" id="bandFundo" points="56.67,196.67 243.33,196.67 290,290 10,290" fill="url(#pyGold)"/>
+        </svg>
+
+        <div class="pyramid-product">
+          <span class="eyebrow">Good Girl</span>
+          <span class="pyramid-product-brand">Carolina Herrera</span>
+        </div>
+
+        <div class="pyramid-copy">
+          <div class="tier" id="tierTopo">
+            <span class="eyebrow">Notas de Topo</span>
+            <div class="n-name">Amêndoa &amp; Café</div>
+            <div class="n-tag">Intrigante</div>
+          </div>
+          <div class="tier" id="tierCoracao">
+            <span class="eyebrow">Notas de Coração</span>
+            <div class="n-name">Jasmim &amp; Tuberosa</div>
+            <div class="n-tag">Sedutora</div>
+          </div>
+          <div class="tier" id="tierFundo">
+            <span class="eyebrow">Notas de Fundo</span>
+            <div class="n-name">Fava-tonca &amp; Cacau</div>
+            <div class="n-tag">Marcante</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -740,9 +789,19 @@ if(!reduced && window.gsap){
   gsap.set(['#pyMist3'],{scale:1.85,opacity:.95});
   pyTl.fromTo('.pyramid-diagram',{opacity:0},{opacity:1,duration:.16},.05);
   pyTl.fromTo('.pyramid-product',{opacity:0},{opacity:1,duration:.12},.08);
+  pyTl.fromTo('#bottleSvg',{opacity:0},{opacity:1,duration:.18},.05);
   pyTl.to('#pyMist1',{scale:0,opacity:0,duration:.2,ease:'power1.in'},0);
   pyTl.to('#pyMist2',{scale:0,opacity:0,duration:.18,ease:'power1.in'},.02);
   pyTl.to('#pyMist3',{scale:0,opacity:0,duration:.16,ease:'power1.in'},.04);
+
+  /* o frasco gira lateralmente conforme o scroll — de um perfil ao outro,
+     como se estivesse sendo mostrado em vitrine (rotação 3D vai na <div>
+     que envolve o SVG — em SVG puro o rotationY do GSAP não tem efeito) */
+  pyTl.fromTo('#bottleStage',{rotationY:-26},{rotationY:26,duration:1,ease:'none'},0);
+
+  /* oscilação contínua e sutil, independente do scroll — dá vida ao frasco parado */
+  gsap.to('#bottleStage',{rotation:1.2,transformOrigin:'50% 90%',duration:3.4,
+    yoyo:true,repeat:-1,ease:'sine.inOut'});
 
   /* 14–32% — Notas de Topo, reveladas já com a névoa dissolvida */
   pyTl.fromTo('#tierTopo',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.14);
@@ -765,6 +824,7 @@ if(!reduced && window.gsap){
 }else{
   document.querySelector('.pyramid-diagram').style.opacity=1;
   document.querySelector('.pyramid-product').style.opacity=1;
+  document.getElementById('bottleSvg').style.opacity=1;
   document.querySelectorAll('.pyramid-copy .tier').forEach(el=>{
     el.style.opacity=1;el.style.position='relative';el.style.margin='0 auto 40px';el.style.transform='none';
   });
