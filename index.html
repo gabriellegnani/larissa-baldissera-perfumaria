@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Larissa Baldissera Perfumaria — Alta Perfumaria em Videira, SC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0e0d24;
+  --navy-2:#191740;
+  --ivory:#f6f1e7;
+  --gold:#c9a45c;
+  --gold-2:#e8d3a2;
+  --rose:#d8b09a;
+  --line:rgba(201,164,92,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--navy);
+  color:var(--ivory);
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:400}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 44px}
+.eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:.68rem;color:var(--gold);font-weight:400}
+
+/* grain */
+.grain{
+  position:fixed;inset:-50%;z-index:98;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation:grainShift .6s steps(4) infinite;
+}
+@keyframes grainShift{0%{transform:translate(0,0)}25%{transform:translate(-2%,1%)}50%{transform:translate(1%,-2%)}75%{transform:translate(-1%,2%)}100%{transform:translate(0,0)}}
+
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:100}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:90;padding:26px 0;transition:.45s ease}
+header.scrolled{padding:14px 0;background:rgba(14,13,36,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav.wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:44px;height:44px;transition:.45s ease}
+header.scrolled .brand img{width:36px;height:36px}
+.brand-name{display:flex;flex-direction:column;line-height:1.15}
+.brand-name b{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:.22em;font-size:.92rem;text-transform:uppercase}
+.brand-name i{font-style:normal;letter-spacing:.5em;font-size:.55rem;text-transform:uppercase;color:var(--gold-2)}
+.navlinks{display:flex;gap:40px;align-items:center}
+.navlinks a{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.75;transition:.3s;position:relative}
+.navlinks a::after{content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--gold);transition:width .35s ease}
+.navlinks a:hover{opacity:1}
+.navlinks a:hover::after{width:100%}
+.nav-cta{color:var(--gold-2)!important;opacity:1!important;display:inline-flex;align-items:center;gap:10px}
+.nav-cta::before{content:'';width:26px;height:1px;background:var(--gold);transition:width .4s ease}
+.nav-cta:hover::before{width:40px}
+.nav-cta::after{display:none}
+
+/* HERO: vídeo real (frasco emerge da escuridão e pousa no líquido), guiado pelo scroll */
+.hero{position:relative;z-index:2;height:400vh}
+.hero-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 55% at 50% 118%, rgba(201,164,92,.16), transparent 60%),
+  radial-gradient(ellipse 45% 40% at 15% -5%, rgba(216,176,154,.08), transparent 60%),
+  linear-gradient(175deg,#0e0d24 0%, #14123a 55%, #0e0d24 100%)}
+.hero-video-wrap{position:absolute;inset:0;overflow:hidden}
+.hero-video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(14,13,36,.5) 0%, rgba(14,13,36,.15) 30%, rgba(14,13,36,.25) 65%, rgba(14,13,36,.7) 100%),
+    radial-gradient(ellipse 60% 50% at 50% 42%, rgba(14,13,36,.1) 30%, rgba(14,13,36,.4) 100%);
+}
+.hero-halo{position:absolute;left:50%;top:50%;width:min(78vh,680px);height:min(78vh,680px);transform:translate(-50%,-50%);border:1px solid var(--line);border-radius:50%;animation:spinSlow 60s linear infinite}
+.hero-halo::before{content:'';position:absolute;inset:38px;border-radius:50%;border:1px dashed rgba(201,164,92,.16)}
+.hero-halo .dot{position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
+@keyframes spinSlow{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero-inner{position:relative;z-index:3;padding-top:70px}
+.hero-logo{width:clamp(130px,17vw,190px);margin:0 auto 34px;display:block;filter:drop-shadow(0 24px 60px rgba(0,0,0,.55));opacity:0}
+.hero h1{font-size:clamp(2.7rem,6vw,5rem);line-height:1.06;opacity:0}
+.hero h1 em{font-style:italic;color:var(--gold-2)}
+.hero .sub{margin:26px auto 0;max-width:520px;color:rgba(246,241,231,.66);font-size:1.02rem;line-height:1.8;font-weight:200;opacity:0}
+.hero-actions{margin-top:44px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;opacity:0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+/* CTA assinatura: texto + traço que se estende, como rubrica de maison */
+.btn{
+  display:inline-flex;align-items:center;gap:18px;
+  font-size:.76rem;letter-spacing:.3em;text-transform:uppercase;
+  padding:10px 0;position:relative;transition:.4s ease;
+}
+.btn .stroke{
+  display:inline-block;width:46px;height:1px;background:var(--gold);
+  position:relative;transition:width .5s cubic-bezier(.16,1,.3,1);
+}
+.btn .stroke::after{
+  content:'';position:absolute;right:-1px;top:-2.5px;
+  width:6px;height:6px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 12px rgba(201,164,92,.8);
+}
+.btn:hover .stroke{width:78px}
+.btn-gold{color:var(--gold-2)}
+.btn-gold:hover{color:#fff}
+.btn-line{color:rgba(246,241,231,.65)}
+.btn-line:hover{color:var(--ivory)}
+.btn-line .stroke{background:rgba(246,241,231,.35)}
+.btn-line .stroke::after{background:rgba(246,241,231,.6);box-shadow:none}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:10px;align-items:center;font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(246,241,231,.45);z-index:3}
+.scroll-hint .thread{width:1px;height:44px;background:linear-gradient(var(--gold),transparent);animation:threadPulse 2.4s ease infinite}
+@keyframes threadPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ============ PONTE DE NÉVOA: liga o Hero à Pirâmide sem "corte de seção" ============
+   a mesma névoa cresce no fim do Hero e já nasce no início da Pirâmide —
+   o olho nunca vê os dois pins trocarem, só a névoa se transformando */
+.mist-bridge{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
+.mist-bridge .flash{
+  position:absolute;left:50%;top:50%;width:60vmax;height:60vmax;
+  transform:translate(-50%,-50%) scale(.4);border-radius:50%;opacity:0;
+  background:radial-gradient(circle, rgba(255,250,235,.9), rgba(232,211,162,.4) 40%, transparent 70%);
+}
+.mist-bridge .layer{
+  position:absolute;left:50%;top:50%;width:150vmax;height:150vmax;border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);filter:blur(70px);opacity:0;will-change:transform,opacity;
+}
+.mist-bridge .layer.m1{background:radial-gradient(circle, rgba(232,211,162,.95), rgba(201,164,92,.55) 45%, rgba(14,13,36,.05) 72%)}
+.mist-bridge .layer.m2{background:radial-gradient(circle, rgba(201,164,92,.8), rgba(14,13,36,.5) 55%, transparent 78%)}
+.mist-bridge .layer.m3{background:radial-gradient(circle, rgba(14,13,36,.95), rgba(14,13,36,.95) 60%, transparent 100%)}
+
+
+
+/* ============ SEÇÃO 2: A PIRÂMIDE OLFATIVA ============ */
+.pyramid{position:relative;z-index:2;height:300vh}
+.pyramid-pin{position:sticky;top:0;height:100vh;overflow:hidden}
+.pyramid-bg{position:absolute;inset:0;background:linear-gradient(175deg,#0e0d24,#171233 55%,#0e0d24)}
+.pyramid-glow{
+  position:absolute;left:50%;top:40%;width:110vmin;height:110vmin;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(circle, rgba(201,164,92,.14), transparent 55%);
+}
+#pyramidDust{position:absolute;inset:0;pointer-events:none}
+/* diagrama: triângulo dividido em 3 faixas que se acendem conforme a pirâmide "desce" */
+.pyramid-diagram{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);width:min(170px,32vw);opacity:0}
+.pyramid-diagram .outline{fill:none;stroke:var(--line);stroke-width:1.5}
+.pyramid-diagram .divider{stroke:var(--line);stroke-width:1}
+.pyramid-diagram .band{opacity:.08;filter:drop-shadow(0 0 0 transparent)}
+/* textos das camadas */
+.pyramid-copy{position:absolute;left:50%;top:70%;transform:translateX(-50%);text-align:center;width:min(520px,86vw)}
+.pyramid-copy .tier{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(24px)}
+.pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.8rem,3.6vw,2.6rem);margin-top:16px}
+.pyramid-copy .n-tag{font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(246,241,231,.55);margin-top:10px}
+.pyramid-meter{
+  position:absolute;right:44px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.pyramid-meter .track{width:1px;height:160px;background:rgba(246,241,231,.15);position:relative}
+.pyramid-meter .fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--gold)}
+.pyramid-meter span{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(246,241,231,.5);font-size:.85rem;writing-mode:vertical-rl}
+
+/* ============ ATO: O BORRIFO (vídeo real) ============ */
+.act{position:relative;z-index:2;height:520vh}
+.act-pin{position:sticky;top:0;height:100vh;overflow:hidden}
+.act-bg{position:absolute;inset:0;background:linear-gradient(175deg,#0e0d24,#14123a 55%,#0e0d24)}
+/* vídeo real, escrubado pelo scroll */
+.act-video-wrap{position:absolute;inset:0;overflow:hidden}
+.act-video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* escurece topo/base pra legibilidade do texto sobre o vídeo */
+.act-scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(14,13,36,.62) 0%, rgba(14,13,36,0) 24%, rgba(14,13,36,0) 60%, rgba(14,13,36,.75) 100%),
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(14,13,36,0) 45%, rgba(14,13,36,.32) 100%);
+}
+.act-glow{
+  position:absolute;left:50%;top:58%;width:120vmin;height:120vmin;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(circle, rgba(201,164,92,.14), transparent 55%);
+}
+/* partículas douradas ambiente, por cima do vídeo */
+#dustCanvas{position:absolute;inset:0;pointer-events:none}
+/* pétalas que prolongam o momento do borrifo, reagindo ao scroll */
+#petalCanvas{position:absolute;inset:0;pointer-events:none}
+/* texto dos atos */
+.act-copy{
+  position:absolute;left:50%;transform:translateX(-50%);
+  text-align:center;width:min(680px,88vw);pointer-events:none;
+}
+.act-copy.top{top:10%}
+#actGesture{bottom:16%}
+.act-copy .eyebrow{display:block;margin-bottom:16px}
+.act-copy h2{font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.1}
+.act-copy h2 em{font-style:italic;color:var(--gold-2)}
+#actIntro,#actGesture,#actFinale{opacity:0}
+/* contador lateral */
+.act-meter{
+  position:absolute;right:44px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.act-meter .track{width:1px;height:160px;background:rgba(246,241,231,.15);position:relative}
+.act-meter .fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--gold)}
+.act-meter span{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(246,241,231,.5);font-size:.85rem;writing-mode:vertical-rl}
+
+/* ============ resto do site ============ */
+.brands{position:relative;z-index:2;padding:140px 0;background:linear-gradient(180deg,transparent,rgba(20,18,58,.55) 20%,rgba(20,18,58,.55) 80%,transparent)}
+.sec-head{max-width:620px;margin:0 auto 70px;text-align:center}
+.sec-head .eyebrow{display:block;margin-bottom:18px}
+.sec-head h2{font-size:clamp(2.1rem,4vw,3.2rem);line-height:1.12}
+.sec-head h2 em{font-style:italic;color:var(--gold-2)}
+.sec-head p{margin-top:18px;color:rgba(246,241,231,.6);line-height:1.8;font-weight:200}
+.brand-rows{border-top:1px solid var(--line)}
+.brand-row{display:grid;grid-template-columns:70px 1fr auto;gap:30px;align-items:center;padding:34px 10px;border-bottom:1px solid var(--line);transition:background .4s,padding-left .4s;opacity:0;transform:translateY(30px)}
+.brand-row.inview{opacity:1;transform:translateY(0);transition:opacity .8s,transform .8s,background .4s,padding-left .4s}
+.brand-row:hover{background:rgba(201,164,92,.06);padding-left:26px}
+.brand-row .idx{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1rem}
+.brand-row h3{font-size:clamp(1.5rem,2.6vw,2.2rem)}
+.brand-row .note-txt{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(246,241,231,.5)}
+
+.kits{position:relative;z-index:2;padding:140px 0}
+.kit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
+.kit{background:var(--navy);padding:56px 40px;position:relative;overflow:hidden;opacity:0;transform:translateY(36px)}
+.kit.inview{opacity:1;transform:translateY(0);transition:opacity .9s,transform .9s}
+.kit::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .6s}
+.kit:hover::before{transform:scaleX(1)}
+.kit .roman{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.05rem;display:block;margin-bottom:26px}
+.kit h3{font-size:1.6rem;margin-bottom:16px}
+.kit p{color:rgba(246,241,231,.6);line-height:1.8;font-size:.94rem;font-weight:200}
+
+.loja{position:relative;z-index:2;padding:140px 0;background:linear-gradient(180deg,transparent,rgba(20,18,58,.5))}
+.loja-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.loja-copy h2{font-size:clamp(2rem,3.4vw,2.9rem);margin:18px 0 34px;line-height:1.15}
+.loja-copy h2 em{font-style:italic;color:var(--gold-2)}
+.info-list{list-style:none}
+.info-list li{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid var(--line);opacity:0;transform:translateX(-24px)}
+.info-list li.inview{opacity:1;transform:translateX(0);transition:opacity .7s,transform .7s}
+.info-list li:first-child{border-top:1px solid var(--line)}
+.info-list .k{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);width:90px;flex-shrink:0;padding-top:4px}
+.info-list .v{font-size:1.02rem;color:rgba(246,241,231,.85)}
+.info-list .v small{display:block;color:rgba(246,241,231,.5);font-size:.82rem;margin-top:4px}
+.loja-visual{position:relative;display:flex;justify-content:center}
+.loja-visual .orbit{width:min(400px,80vw);height:min(400px,80vw);border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;animation:spinSlow 80s linear infinite reverse}
+.loja-visual .orbit::before{content:'';position:absolute;inset:26px;border:1px dashed rgba(201,164,92,.18);border-radius:50%}
+.loja-visual img{width:56%;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 24px 60px rgba(0,0,0,.5));animation:spinSlow 80s linear infinite}
+
+.final{position:relative;z-index:2;padding:160px 0 140px;text-align:center}
+.final h2{font-size:clamp(2.3rem,5vw,4rem);line-height:1.1;max-width:800px;margin:20px auto 26px}
+.final h2 em{font-style:italic;color:var(--gold-2)}
+.final p{color:rgba(246,241,231,.6);max-width:460px;margin:0 auto 48px;line-height:1.85;font-weight:200}
+
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px 0 36px}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:22px}
+.foot-brand{display:flex;align-items:center;gap:12px}
+.foot-brand img{width:34px;height:34px}
+.foot-brand span{font-family:'Cormorant Garamond',serif;letter-spacing:.2em;text-transform:uppercase;font-size:.8rem}
+.foot small{color:rgba(246,241,231,.4);font-size:.74rem}
+
+.wa{position:fixed;bottom:28px;right:28px;z-index:95;width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(0,0,0,.35);font-size:1.35rem;transition:transform .3s}
+.wa:hover{transform:scale(1.1)}
+
+@media(max-width:920px){
+  .wrap{padding:0 26px}
+  .navlinks{display:none}
+  .act-meter{right:18px}
+  .kit-grid{grid-template-columns:1fr}
+  .loja-grid{grid-template-columns:1fr;gap:50px}
+  .brand-row{grid-template-columns:44px 1fr;gap:16px}
+  .brand-row .note-txt{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .grain,.hero-halo,.marquee-track,.loja-visual .orbit,.loja-visual img{animation:none!important}
+  .hero{height:auto}
+  .hero-pin{position:relative;height:auto;padding:140px 0}
+  .pyramid{height:auto}
+  .pyramid-pin{position:relative;height:auto;padding:120px 0}
+  .pyramid-diagram{position:relative;display:block;left:auto;top:auto;transform:none;margin:0 auto 40px;opacity:1}
+  .pyramid-copy{position:relative;left:auto;top:auto;transform:none;margin:0 auto}
+  .pyramid-meter{display:none}
+  .mist-bridge{display:none}
+  .act{height:auto}
+  .act-pin{position:relative;height:auto;padding:120px 0}
+  .act-copy{position:relative;left:auto;top:auto;transform:none;margin:60px auto}
+  .act-meter{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
+
+<header id="hdr">
+  <nav class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/logo-circle.png" alt="Larissa Baldissera Perfumaria">
+      <span class="brand-name"><b>Larissa Baldissera</b><i>Perfumaria</i></span>
+    </a>
+    <div class="navlinks">
+      <a href="#experiencia">A Experiência</a>
+      <a href="#marcas">Maisons</a>
+      <a href="#kits">Presentes</a>
+      <a href="#loja">A Loja</a>
+      <a class="nav-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-pin">
+    <div class="hero-bg"></div>
+    <div class="hero-video-wrap">
+      <video id="heroVideo" src="assets/video/hero-frasco-liquido.mp4" poster="assets/video/hero-poster.jpg" muted playsinline preload="auto"></video>
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="hero-halo"><span class="dot"></span></div>
+    <div class="hero-inner wrap" id="heroInner">
+      <img class="hero-logo" src="assets/logo-circle.png" alt="Selo Larissa Baldissera">
+      <h1>A arte de vestir<br><em>uma fragrância</em></h1>
+      <p class="sub">Alta perfumaria com curadoria pessoal. As maisons mais desejadas do mundo, escolhidas frasco a frasco em Videira — entregues em todo o Brasil.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="https://wa.me/5549999427624" target="_blank" rel="noopener"><span class="stroke"></span>Fazer um pedido</a>
+        <a class="btn btn-line" href="#experiencia"><span class="stroke"></span>Descobrir</a>
+      </div>
+    </div>
+    <div class="scroll-hint" id="scrollHint"><span>Role para sentir</span><span class="thread"></span></div>
+
+    <!-- ponte: a névoa nasce aqui e "atravessa" pra dentro da Pirâmide -->
+    <div class="mist-bridge" id="heroMist">
+      <div class="flash" id="heroMistFlash"></div>
+      <div class="layer m1" id="heroMist1"></div>
+      <div class="layer m2" id="heroMist2"></div>
+      <div class="layer m3" id="heroMist3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEÇÃO 2: A PIRÂMIDE OLFATIVA ===================== -->
+<section class="pyramid" id="notas">
+  <div class="pyramid-pin">
+    <div class="pyramid-bg"></div>
+    <div class="pyramid-glow" id="pyramidGlow"></div>
+    <canvas id="pyramidDust"></canvas>
+
+    <!-- continuação da mesma névoa: já nasce cobrindo a tela e se dissolve -->
+    <div class="mist-bridge" id="pyMist">
+      <div class="layer m1" id="pyMist1"></div>
+      <div class="layer m2" id="pyMist2"></div>
+      <div class="layer m3" id="pyMist3"></div>
+    </div>
+
+    <svg class="pyramid-diagram" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pyGold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
+        </linearGradient>
+      </defs>
+      <polygon class="outline" points="150,10 290,290 10,290"/>
+      <line class="divider" x1="103.33" y1="103.33" x2="196.67" y2="103.33"/>
+      <line class="divider" x1="56.67" y1="196.67" x2="243.33" y2="196.67"/>
+      <polygon class="band" id="bandTopo" points="150,10 196.67,103.33 103.33,103.33" fill="url(#pyGold)"/>
+      <polygon class="band" id="bandCoracao" points="103.33,103.33 196.67,103.33 243.33,196.67 56.67,196.67" fill="url(#pyGold)"/>
+      <polygon class="band" id="bandFundo" points="56.67,196.67 243.33,196.67 290,290 10,290" fill="url(#pyGold)"/>
+    </svg>
+
+    <div class="pyramid-copy">
+      <div class="tier" id="tierTopo">
+        <span class="eyebrow">Notas de Topo</span>
+        <div class="n-name">Bergamota</div>
+        <div class="n-tag">Luminosa</div>
+      </div>
+      <div class="tier" id="tierCoracao">
+        <span class="eyebrow">Notas de Coração</span>
+        <div class="n-name">Pimenta Rosa</div>
+        <div class="n-tag">Vibrante</div>
+      </div>
+      <div class="tier" id="tierFundo">
+        <span class="eyebrow">Notas de Fundo</span>
+        <div class="n-name">Baunilha</div>
+        <div class="n-tag">Envolvente</div>
+      </div>
+    </div>
+
+    <div class="pyramid-meter">
+      <span>a pirâmide</span>
+      <div class="track"><div class="fill" id="pyramidMeterFill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ATO: O BORRIFO ===================== -->
+<section class="act" id="experiencia">
+  <div class="act-pin">
+    <div class="act-bg" id="actBg"></div>
+
+    <!-- vídeo real: frasco, borrifo e pétalas — escrubado pelo scroll -->
+    <div class="act-video-wrap">
+      <video id="actVideo" src="assets/video/borrifo-petalas.mp4" poster="assets/video/borrifo-poster.jpg" muted playsinline preload="auto"></video>
+    </div>
+    <div class="act-scrim"></div>
+
+    <div class="act-glow" id="actGlow"></div>
+    <canvas id="dustCanvas"></canvas>
+    <!-- pétalas que continuam a cena do vídeo, reagindo ao scroll -->
+    <canvas id="petalCanvas"></canvas>
+
+    <!-- textos -->
+    <div class="act-copy top" id="actIntro">
+      <span class="eyebrow">A Experiência</span>
+      <h2>Um perfume não se explica.<br><em>Se sente.</em></h2>
+    </div>
+
+    <div class="act-copy" id="actGesture">
+      <span class="eyebrow">O Gesto</span>
+    </div>
+
+    <div class="act-copy top" id="actFinale">
+      <span class="eyebrow">O Rastro</span>
+      <h2>O que fica no ar<br><em>é quem você é</em></h2>
+    </div>
+
+    <div class="act-meter">
+      <span>a experiência</span>
+      <div class="track"><div class="fill" id="meterFill"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="brands" id="marcas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Curadoria</span>
+      <h2>As maisons da <em>nossa vitrine</em></h2>
+      <p>Perfumaria importada e original, selecionada pela Larissa entre os lançamentos mais desejados e os clássicos eternos.</p>
+    </div>
+    <div class="brand-rows">
+      <div class="brand-row"><span class="idx">Nº 01</span><h3>Carolina Herrera</h3><span class="note-txt">Good Girl · 212 VIP · CH</span></div>
+      <div class="brand-row"><span class="idx">Nº 02</span><h3>Chloé</h3><span class="note-txt">Eau de Parfum · Coffrets</span></div>
+      <div class="brand-row"><span class="idx">Nº 03</span><h3>Valentino</h3><span class="note-txt">Born in Roma · Uomo</span></div>
+      <div class="brand-row"><span class="idx">Nº 04</span><h3>Moschino</h3><span class="note-txt">Toy 2 Bubble Gum</span></div>
+      <div class="brand-row"><span class="idx">Nº 05</span><h3>Zadig &amp; Voltaire</h3><span class="note-txt">This is Her · This is Him</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="kits" id="kits">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Presentes</span>
+      <h2>Coffrets prontos para <em>emocionar</em></h2>
+      <p>Caixas de presente montadas com perfume, miniatura e body lotion — embrulhadas como merecem.</p>
+    </div>
+    <div class="kit-grid">
+      <div class="kit"><span class="roman">I.</span><h3>Coffret Assinatura</h3><p>Eau de parfum e body lotion da mesma linha, na caixa oficial da maison com laço. O presente que nunca erra.</p></div>
+      <div class="kit"><span class="roman">II.</span><h3>Coffret Viagem</h3><p>Frasco de tamanho cheio acompanhado da miniatura de bolsa. A fragrância favorita, em qualquer lugar.</p></div>
+      <div class="kit"><span class="roman">III.</span><h3>Coffret Sob Medida</h3><p>Conte pra quem é o presente e a ocasião — a Larissa monta a combinação perfeita com você, pelo WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="loja" id="loja">
+  <div class="wrap loja-grid">
+    <div class="loja-copy">
+      <span class="eyebrow">A Loja</span>
+      <h2>De Videira <em>para todo o Brasil</em></h2>
+      <ul class="info-list">
+        <li><span class="k">Endereço</span><span class="v">R. Victor Meirelles — Matriz<small>Videira · Santa Catarina · 89600-000</small></span></li>
+        <li><span class="k">WhatsApp</span><span class="v">(49) 99942-7624<small>Atendimento pessoal e envio para todo o país</small></span></li>
+        <li><span class="k">Instagram</span><span class="v">@larissabaldisseraperfumaria<small>Lançamentos e novidades em primeira mão</small></span></li>
+        <li><span class="k">E-mail</span><span class="v">lah.baldissera@hotmail.com</span></li>
+      </ul>
+    </div>
+    <div class="loja-visual">
+      <div class="orbit"></div>
+      <img src="assets/logo-circle.png" alt="Larissa Baldissera Perfumaria">
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow">Comece agora</span>
+    <h2>Qual será a sua <em>próxima assinatura?</em></h2>
+    <p>Chame no WhatsApp e receba uma curadoria pessoal — do clássico ao lançamento que acabou de chegar.</p>
+    <a class="btn btn-gold" href="https://wa.me/5549999427624" target="_blank" rel="noopener"><span class="stroke"></span>Conversar com a Larissa</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <img src="assets/logo-circle.png" alt="">
+      <span>Larissa Baldissera Perfumaria</span>
+    </div>
+    <small>Videira, SC · Perfumes originais · Entrega para todo o Brasil</small>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/5549999427624" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* scroll suave (Lenis), carregado à parte — dá o "peso" cinematográfico
+   ao rolar; ScrollTrigger.update mantém o timeline do Ato em sincronia
+   com o scroll suavizado. Carregamento assíncrono: se falhar, o site
+   segue funcionando normalmente com o scroll nativo */
+if(!reduced){
+  const lenisScript = document.createElement('script');
+  lenisScript.src = 'https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js';
+  lenisScript.onload = () => {
+    const lenis = new Lenis({
+      duration: 1.05,
+      easing: t => 1 - Math.pow(1 - t, 3),
+      smoothWheel: true
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  };
+  document.head.appendChild(lenisScript);
+}
+
+/* header + progress */
+const hdr = document.getElementById('hdr');
+const progress = document.getElementById('progress');
+addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', scrollY > 40);
+  progress.style.width = (scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
+}, {passive:true});
+
+/* reveals */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){
+    e.target.style.transitionDelay = (e.target.dataset.d || 0) + 'ms';
+    e.target.classList.add('inview'); io.unobserve(e.target);
+  }});
+},{threshold:.18});
+document.querySelectorAll('.brand-row').forEach((el,i)=>{el.dataset.d=i*90;io.observe(el)});
+document.querySelectorAll('.kit').forEach((el,i)=>{el.dataset.d=i*130;io.observe(el)});
+document.querySelectorAll('.info-list li').forEach((el,i)=>{el.dataset.d=i*100;io.observe(el)});
+
+/* ---------- partículas douradas ambiente (dust), reutilizável entre seções ---------- */
+function initDust(canvasId){
+  const dust = document.getElementById(canvasId);
+  if(!dust) return;
+  const dctx = dust.getContext('2d');
+  let DW,DH,dustP=[];
+  function sizeDust(){DW=dust.width=dust.offsetWidth;DH=dust.height=dust.offsetHeight}
+  sizeDust();addEventListener('resize',sizeDust);
+  for(let i=0;i<40;i++){
+    dustP.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*1.8,
+      vx:(Math.random()-.5)*.0004,vy:-.0002-Math.random()*.0005,
+      tw:Math.random()*6.28,tws:.01+Math.random()*.03});
+  }
+  if(!reduced)(function dustLoop(){
+    dctx.clearRect(0,0,DW,DH);
+    dustP.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.tw+=p.tws;
+      if(p.y<0)p.y=1;if(p.x<0)p.x=1;if(p.x>1)p.x=0;
+      const a=.14+.22*Math.abs(Math.sin(p.tw));
+      dctx.fillStyle='rgba(232,211,162,'+a+')';
+      dctx.beginPath();dctx.arc(p.x*DW,p.y*DH,p.r,0,7);dctx.fill();
+    });
+    requestAnimationFrame(dustLoop);
+  })();
+}
+initDust('dustCanvas');
+initDust('pyramidDust');
+
+/* ---------- pétalas: camada reativa sobre o vídeo do borrifo ---------- */
+const petalC = document.getElementById('petalCanvas');
+const pctx = petalC.getContext('2d');
+let PW,PH,petals=[];
+function sizePetal(){PW=petalC.width=petalC.offsetWidth;PH=petalC.height=petalC.offsetHeight}
+sizePetal();addEventListener('resize',sizePetal);
+let petalEmit = 0; // 0..1, controlado pela timeline do Ato — intensifica quando o vídeo mostra as pétalas
+if(!reduced)(function petalLoop(){
+  pctx.clearRect(0,0,PW,PH);
+  if(petalEmit>.02){
+    const n = Math.round(petalEmit*1.4);
+    for(let i=0;i<n;i++){
+      petals.push({
+        x:Math.random(), y:-.04,
+        vx:(Math.random()-.5)*.0015, vy:.0006+Math.random()*.0009,
+        rot:Math.random()*6.28, vr:(Math.random()-.5)*.03,
+        size:5+Math.random()*7, life:1, decay:.0018+Math.random()*.0022,
+        hue: Math.random()<.5 ? '216,176,154' : '232,180,168'
+      });
+    }
+  }
+  petals = petals.filter(p=>p.life>0 && p.y<1.1);
+  petals.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; p.life-=p.decay;
+    const a = Math.max(0,p.life)*.55;
+    pctx.save();
+    pctx.translate(p.x*PW, p.y*PH);
+    pctx.rotate(p.rot);
+    pctx.fillStyle = 'rgba('+p.hue+','+a+')';
+    pctx.beginPath();
+    pctx.ellipse(0,0,p.size,p.size*.62,0,0,7);
+    pctx.fill();
+    pctx.restore();
+  });
+  requestAnimationFrame(petalLoop);
+})();
+
+/* ---------- HERO: vídeo real escrubado pelo scroll ---------- */
+if(!reduced && window.gsap){
+  gsap.registerPlugin(ScrollTrigger);
+
+  const heroVideo = document.getElementById('heroVideo');
+
+  const heroTl = gsap.timeline({
+    scrollTrigger:{
+      trigger:'#top',
+      start:'top top',
+      end:'bottom bottom',
+      scrub:0.35          // resposta direta: o vídeo precisa "seguir o dedo"
+    },
+    defaults:{ease:'none'}
+  });
+
+  /* o progresso do scroll dirige o tempo do vídeo (frasco emerge da escuridão e pousa no líquido) */
+  heroTl.to({v:0},{v:1,duration:1,onUpdate:function(){
+    if(heroVideo.readyState >= 1) heroVideo.currentTime = this.targets()[0].v * heroVideo.duration;
+  }},0);
+
+  /* 0–12% — marca e headline entram */
+  heroTl.fromTo(['.hero-logo','.hero h1','.hero .sub','.hero-actions'],
+    {opacity:0,y:26},
+    {opacity:1,y:0,duration:.06,stagger:.02,ease:'power2.out'},0);
+
+  /* a dica "role para sentir" some assim que o usuário começa a rolar */
+  heroTl.to('#scrollHint',{opacity:0,duration:.04},.02);
+
+  /* 30–44% — marca e headline saem, dando lugar ao respingo do frasco no líquido */
+  heroTl.to(['.hero-logo','.hero h1','.hero .sub','.hero-actions'],
+    {opacity:0,y:-24,duration:.1,stagger:.015},.30);
+
+  /* 74–100% — o "gatilho": um pulso de luz, e a névoa dourada nasce e cobre a tela —
+     essa é a ponte que continua exatamente igual no início da Pirâmide */
+  heroTl.fromTo('#heroMistFlash',{opacity:0,scale:.4},{opacity:1,scale:1.1,duration:.05,ease:'power2.out'},.74);
+  heroTl.to('#heroMistFlash',{opacity:0,duration:.08},.79);
+  heroTl.fromTo('#heroMist1',{scale:0,opacity:0},{scale:1.3,opacity:.95,duration:.24,ease:'power1.out'},.76);
+  heroTl.fromTo('#heroMist2',{scale:0,opacity:0},{scale:1.55,opacity:.85,duration:.22,ease:'power1.out'},.78);
+  heroTl.fromTo('#heroMist3',{scale:0,opacity:0},{scale:1.85,opacity:.95,duration:.2,ease:'power1.out'},.80);
+}else{
+  /* sem scroll-scrub (reduced-motion ou GSAP indisponível): o vídeo toca sozinho em loop */
+  const heroVideo = document.getElementById('heroVideo');
+  if(heroVideo){ heroVideo.loop = true; heroVideo.play().catch(()=>{}); }
+  document.querySelectorAll('.hero-logo,.hero h1,.hero .sub,.hero-actions').forEach(el=>{el.style.opacity=1});
+  const scrollHint = document.getElementById('scrollHint');
+  if(scrollHint) scrollHint.style.display='none';
+}
+
+/* ---------- SEÇÃO 2: a pirâmide olfativa desce enquanto rola ---------- */
+if(!reduced && window.gsap){
+  gsap.registerPlugin(ScrollTrigger);
+
+  const pyTl = gsap.timeline({
+    scrollTrigger:{
+      trigger:'#notas',
+      start:'top top',
+      end:'bottom bottom',
+      scrub:1              // ritmo elegante, sem vídeo pra "seguir" — pode ser mais lento
+    },
+    defaults:{ease:'none'}
+  });
+
+  /* 0–22% — continuação exata da névoa que nasceu no fim do Hero: já entra
+     cobrindo a tela e se dissolve, revelando a pirâmide "nascendo" dentro dela */
+  gsap.set(['#pyMist1'],{scale:1.3,opacity:.95});
+  gsap.set(['#pyMist2'],{scale:1.55,opacity:.85});
+  gsap.set(['#pyMist3'],{scale:1.85,opacity:.95});
+  pyTl.fromTo('.pyramid-diagram',{opacity:0},{opacity:1,duration:.16},.05);
+  pyTl.to('#pyMist1',{scale:0,opacity:0,duration:.2,ease:'power1.in'},0);
+  pyTl.to('#pyMist2',{scale:0,opacity:0,duration:.18,ease:'power1.in'},.02);
+  pyTl.to('#pyMist3',{scale:0,opacity:0,duration:.16,ease:'power1.in'},.04);
+
+  /* 14–32% — Notas de Topo, reveladas já com a névoa dissolvida */
+  pyTl.fromTo('#tierTopo',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.14);
+  pyTl.to('#bandTopo',{opacity:.6,duration:.1},.14);
+  pyTl.to('#tierTopo',{opacity:0,y:-18,duration:.08},.32);
+
+  /* 36–60% — Notas de Coração */
+  pyTl.fromTo('#tierCoracao',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.36);
+  pyTl.to('#bandCoracao',{opacity:.6,duration:.1},.36);
+  pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(216,176,154,.18), transparent 55%)',duration:.2},.36);
+  pyTl.to('#tierCoracao',{opacity:0,y:-18,duration:.08},.60);
+
+  /* 68–100% — Notas de Fundo: permanece, como o rastro que dura mais na pele */
+  pyTl.fromTo('#tierFundo',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.68);
+  pyTl.to('#bandFundo',{opacity:.6,duration:.12},.68);
+  pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(201,164,92,.2), transparent 55%)',duration:.2},.68);
+
+  gsap.to('#pyramidMeterFill',{height:'100%',scrollTrigger:{
+    trigger:'#notas',start:'top top',end:'bottom bottom',scrub:true}});
+}else{
+  document.querySelector('.pyramid-diagram').style.opacity=1;
+  document.querySelectorAll('.pyramid-copy .tier').forEach(el=>{
+    el.style.opacity=1;el.style.position='relative';el.style.margin='0 auto 40px';el.style.transform='none';
+  });
+  document.querySelectorAll('.pyramid-diagram .band').forEach(b=>{b.style.opacity=.5});
+}
+
+/* ---------- ATO: vídeo real escrubado pelo scroll ---------- */
+if(!reduced && window.gsap){
+  gsap.registerPlugin(ScrollTrigger);
+
+  const actVideo = document.getElementById('actVideo');
+
+  const tl = gsap.timeline({
+    scrollTrigger:{
+      trigger:'#experiencia',
+      start:'top top',
+      end:'bottom bottom',
+      scrub:0.35            // resposta mais direta: o vídeo precisa "seguir o dedo", não arrastar como o resto do site
+    },
+    defaults:{ease:'none'}
+  });
+
+  /* o progresso do scroll dirige o tempo do vídeo — mesma técnica de scroll-scrub de páginas de produto da Apple */
+  tl.to({v:0},{v:1,duration:1,onUpdate:function(){
+    if(actVideo.readyState >= 1) actVideo.currentTime = this.targets()[0].v * actVideo.duration;
+  }},0);
+
+  /* 0–20% — abertura: frasco em still, intro visível */
+  tl.fromTo('#actIntro',{opacity:0,y:30},{opacity:1,y:0,duration:.08},.02);
+  tl.to('#actIntro',{opacity:0,y:-24,duration:.08},.20);
+
+  /* "O Gesto" — breve, no exato momento em que a mão pressiona o borrifador no vídeo */
+  tl.fromTo('#actGesture',{opacity:0,y:20},{opacity:1,y:0,duration:.06},.38);
+  tl.to('#actGesture',{opacity:0,y:-14,duration:.06},.52);
+
+  /* fundo aquece de navy pra um tom âmbar-rosado quando o buquê floral aparece no vídeo */
+  tl.to('#actGlow',{background:'radial-gradient(circle, rgba(216,176,154,.2), transparent 55%)',duration:.3},.55);
+
+  /* pétalas reagem ao vídeo: a camada de partículas intensifica junto com o buquê florescendo na tela */
+  tl.to({v:0},{v:1,duration:.22,onUpdate:function(){petalEmit=this.targets()[0].v}},.60);
+  tl.to({v:1},{v:0,duration:.18,onUpdate:function(){petalEmit=this.targets()[0].v}},.86);
+
+  /* 93–100% — finale */
+  tl.fromTo('#actFinale',{opacity:0,y:30},{opacity:1,y:0,duration:.07},.93);
+
+  /* medidor lateral */
+  gsap.to('#meterFill',{height:'100%',scrollTrigger:{
+    trigger:'#experiencia',start:'top top',end:'bottom bottom',scrub:true}});
+}else{
+  /* sem scroll-scrub (reduced-motion ou GSAP indisponível): o vídeo toca sozinho em loop */
+  const actVideo = document.getElementById('actVideo');
+  if(actVideo){ actVideo.loop = true; actVideo.play().catch(()=>{}); }
+  ['actIntro','actGesture','actFinale'].forEach(id=>{
+    const el=document.getElementById(id);el.style.opacity=1;el.style.position='relative';
+    el.style.margin='60px auto';el.style.transform='none';
+  });
+}
+</script>
+</body>
+</html>
