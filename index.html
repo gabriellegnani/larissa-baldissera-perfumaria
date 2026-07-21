@@ -140,14 +140,63 @@ header.scrolled .brand img{width:36px;height:36px}
   background:radial-gradient(circle, rgba(201,164,92,.14), transparent 55%);
 }
 #pyramidDust{position:absolute;inset:0;pointer-events:none}
-/* dois lados: o frasco (ilustração original) e a pirâmide */
+/* ============ palco único: frasco e pirâmide na mesma luz ============ */
+/* brumas assimétricas de fundo — quebram a uniformidade, dão profundidade */
+.pyramid-glow-2{
+  position:absolute;left:20%;top:20%;width:56vmin;height:56vmin;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(circle, rgba(232,211,162,.10), transparent 62%);
+}
+.pyramid-glow-3{
+  position:absolute;left:82%;top:76%;width:64vmin;height:64vmin;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(circle, rgba(216,176,154,.09), transparent 62%);
+}
+/* feixe de luz diagonal, bem sutil — sensação de iluminação de estúdio */
+.pyramid-sweep{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, transparent 32%, rgba(232,211,162,.05) 48%, transparent 64%);
+}
+/* linha-eixo dourada entre as duas colunas — costura visualmente o frasco à pirâmide */
+.pyramid-seam{
+  position:absolute;left:50%;top:12%;bottom:12%;width:1px;
+  transform:translateX(-50%);pointer-events:none;
+  background:linear-gradient(rgba(201,164,92,0), rgba(201,164,92,.22) 35%, rgba(201,164,92,.22) 65%, rgba(201,164,92,0));
+}
+/* poça de luz no "chão" compartilhado — frasco e pirâmide parecem estar na mesma vitrine */
+.pyramid-stage-glow{
+  position:absolute;left:50%;bottom:10%;width:88%;max-width:860px;height:190px;
+  transform:translateX(-50%);pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse closest-side, rgba(201,164,92,.20), transparent 70%);
+  filter:blur(2px);opacity:0;
+}
+/* dois lados: o frasco (foto real) e a pirâmide */
 .pyramid-split{position:absolute;inset:0;z-index:1;display:grid;grid-template-columns:1fr 1fr}
 .pyramid-bottle-col{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
-.pyramid-bottle-stage{perspective:1200px;width:min(220px,34vw);opacity:0}
+.pyramid-bottle-stage{position:relative;perspective:1200px;width:min(300px,42vw);opacity:0}
+/* halo vertical atrás do frasco, como um spot de vitrine */
+.bottle-spotlight{
+  position:absolute;left:50%;top:52%;width:150%;height:135%;z-index:-1;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(ellipse 42% 58% at 50% 55%, rgba(232,211,162,.22), transparent 68%);
+}
 #bottleSvg{width:100%;display:block;filter:drop-shadow(0 40px 70px rgba(0,0,0,.5))}
+/* reflexo espelhado, como se o frasco estivesse sobre uma superfície polida */
+.bottle-reflection{
+  position:absolute;left:0;top:100%;width:100%;display:block;
+  transform:scaleY(-1);filter:blur(2px);opacity:.38;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 60%);
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 60%);
+}
 .pyramid-notes-col{position:relative;height:100%;opacity:0}
+/* halo amplo por trás do diagrama+notas, na mesma luz do frasco */
+.pyramid-diagram-glow{
+  position:absolute;left:50%;top:46%;width:120%;height:70%;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(ellipse 55% 60% at 50% 50%, rgba(201,164,92,.12), transparent 68%);
+}
 /* diagrama: triângulo dividido em 3 faixas que se acendem conforme a pirâmide "desce" */
-.pyramid-diagram{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:min(150px,28vw)}
+.pyramid-diagram{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:min(170px,30vw)}
 .pyramid-diagram .outline{fill:none;stroke:var(--line);stroke-width:1.5}
 .pyramid-diagram .divider{stroke:var(--line);stroke-width:1}
 .pyramid-diagram .band{opacity:.08;filter:drop-shadow(0 0 0 transparent)}
@@ -160,8 +209,8 @@ header.scrolled .brand img{width:36px;height:36px}
 .pyramid-title h2 em{font-style:italic;color:var(--gold-2)}
 /* textos das camadas */
 .pyramid-copy{position:absolute;left:50%;top:68%;transform:translateX(-50%);text-align:center;width:min(520px,86vw)}
-.pyramid-copy .tier{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(24px)}
-.pyramid-copy .tier.inview{opacity:1;transform:translateY(0);transition:opacity .8s ease,transform .8s ease}
+.pyramid-copy .tier{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(24px) scale(.94)}
+.pyramid-copy .tier.inview{opacity:1;transform:translateY(0) scale(1);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
 .pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.8rem,3.6vw,2.6rem);margin-top:16px}
 .pyramid-copy .n-tag{font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(246,241,231,.55);margin-top:10px}
 .pyramid-meter{
@@ -315,6 +364,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .pyramid-split{position:relative;display:grid}
   .pyramid-bottle-col{position:relative;height:auto;display:flex;align-items:center;justify-content:center;padding:40px 0}
   .pyramid-bottle-stage{width:min(200px,80%);opacity:1}
+  .pyramid-stage-glow{opacity:1}
+  .bottle-reflection{display:none}
   .pyramid-notes-col{position:relative;height:auto;opacity:1;padding:40px 0}
   .pyramid-title{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px}
   .pyramid-diagram{position:relative;display:block;left:auto;top:auto;transform:none;margin:0 auto 40px}
@@ -395,16 +446,27 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
     </div>
 
     <div class="pyramid-split">
+      <!-- atmosfera compartilhada: dá profundidade e costura as duas colunas
+           numa composição só, em vez de dois elementos independentes -->
+      <div class="pyramid-glow-2"></div>
+      <div class="pyramid-glow-3"></div>
+      <div class="pyramid-sweep"></div>
+      <div class="pyramid-seam"></div>
+      <div class="pyramid-stage-glow" id="stageGlow"></div>
+
       <!-- lado A: foto real do frasco Good Girl (Instagram da própria Larissa),
-           gira lateralmente conforme o scroll -->
+           gira lateralmente conforme o scroll, com spot de luz e reflexo -->
       <div class="pyramid-bottle-col">
         <div class="pyramid-bottle-stage" id="bottleStage">
+          <div class="bottle-spotlight"></div>
           <img class="pyramid-bottle" id="bottleSvg" src="assets/goodgirl-real.png" alt="Good Girl — Carolina Herrera">
+          <img class="bottle-reflection" src="assets/goodgirl-real.png" alt="" aria-hidden="true">
         </div>
       </div>
 
-      <!-- lado B: a pirâmide olfativa -->
+      <!-- lado B: a pirâmide olfativa, na mesma luz do frasco -->
       <div class="pyramid-notes-col">
+        <div class="pyramid-diagram-glow"></div>
         <svg class="pyramid-diagram" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="pyGold" x1="0" y1="0" x2="0" y2="1">
@@ -794,19 +856,23 @@ if(!reduced && window.gsap){
   gsap.to('#bottleStage',{rotation:1.2,transformOrigin:'50% 90%',duration:3.4,
     yoyo:true,repeat:-1,ease:'sine.inOut'});
 
+  /* entrada da atmosfera: a poça de luz do "palco" e o halo da pirâmide
+     acendem junto com o frasco e as notas — tudo nasce como uma cena só */
+  pyTl.fromTo('#stageGlow',{opacity:0},{opacity:1,duration:.22},.02);
+
   /* 14–32% — Notas de Topo, reveladas já com a névoa dissolvida */
-  pyTl.fromTo('#tierTopo',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.14);
+  pyTl.fromTo('#tierTopo',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.14);
   pyTl.to('#bandTopo',{opacity:.6,duration:.1},.14);
   pyTl.to('#tierTopo',{opacity:0,y:-18,duration:.08},.32);
 
   /* 36–60% — Notas de Coração */
-  pyTl.fromTo('#tierCoracao',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.36);
+  pyTl.fromTo('#tierCoracao',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.36);
   pyTl.to('#bandCoracao',{opacity:.6,duration:.1},.36);
   pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(216,176,154,.18), transparent 55%)',duration:.2},.36);
   pyTl.to('#tierCoracao',{opacity:0,y:-18,duration:.08},.60);
 
   /* 68–100% — Notas de Fundo: permanece, como o rastro que dura mais na pele */
-  pyTl.fromTo('#tierFundo',{opacity:0,y:24},{opacity:1,y:0,duration:.1},.68);
+  pyTl.fromTo('#tierFundo',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.68);
   pyTl.to('#bandFundo',{opacity:.6,duration:.12},.68);
   pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(201,164,92,.2), transparent 55%)',duration:.2},.68);
 
@@ -815,6 +881,7 @@ if(!reduced && window.gsap){
 }else{
   document.querySelector('.pyramid-notes-col').style.opacity=1;
   document.getElementById('bottleStage').style.opacity=1;
+  document.getElementById('stageGlow').style.opacity=1;
   /* cada nota revela na sua vez ao entrar na tela, em vez de tudo de uma vez */
   document.querySelectorAll('.pyramid-copy .tier').forEach((el,i)=>{el.dataset.d=i*120;io.observe(el)});
   document.querySelectorAll('.pyramid-diagram .band').forEach(b=>{b.style.opacity=.5});
