@@ -157,16 +157,6 @@ header.scrolled .brand img{width:36px;height:36px}
 }
 /* palco central: tudo no mesmo eixo — o frasco é o protagonista absoluto */
 .pyramid-stage{position:absolute;inset:0;z-index:1}
-/* pirâmide-fantasma: enorme e translúcida, atrás do frasco — a pirâmide
-   deixa de ser um infográfico ao lado e passa a fazer parte do produto */
-.pyramid-mega-stage{
-  position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);
-  width:min(640px,88vw);z-index:1;opacity:0;pointer-events:none;
-}
-.pyramid-mega{width:100%;display:block}
-.pyramid-mega .outline{fill:none;stroke:rgba(201,164,92,.22);stroke-width:1}
-.pyramid-mega .divider{stroke:rgba(201,164,92,.14);stroke-width:1}
-.pyramid-mega .band{opacity:.05}
 /* poça de luz sob o frasco — o "chão" da vitrine */
 .pyramid-stage-glow{
   position:absolute;left:50%;bottom:20%;width:64%;max-width:580px;height:150px;
@@ -210,6 +200,9 @@ header.scrolled .brand img{width:36px;height:36px}
 }
 .pyramid-copy .tier{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(24px) scale(.94)}
 .pyramid-copy .tier.inview{opacity:1;transform:translateY(0) scale(1);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+/* numeral fino no lugar do diagrama — marca a hierarquia (I/II/III) sem
+   precisar desenhar uma pirâmide, funciona igual no modo estático */
+.pyramid-copy .tier-num{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.2rem,4.2vw,3.2rem);color:rgba(201,164,92,.4);line-height:1}
 .pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.9rem,3.8vw,2.8rem);margin-top:16px}
 .pyramid-copy .n-tag{font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(246,241,231,.55);margin-top:10px}
 .pyramid-meter{
@@ -349,7 +342,6 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .act-meter{right:18px}
   .kit-grid{grid-template-columns:1fr}
   .colecao-grid{grid-template-columns:1fr}
-  .pyramid-mega-stage{width:min(480px,94vw)}
   .pyramid-bottle-stage{width:min(190px,44vw)}
   .loja-grid{grid-template-columns:1fr;gap:50px}
   .brand-row{grid-template-columns:44px 1fr;gap:16px}
@@ -362,7 +354,6 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .pyramid{height:auto}
   .pyramid-pin{position:relative;height:auto;padding:120px 0}
   .pyramid-stage{position:relative;display:block;padding:60px 0}
-  .pyramid-mega-stage{display:none}
   .pyramid-title-center{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px;opacity:1}
   .pyramid-bottle-stage{position:relative;left:auto;top:auto;transform:none;width:min(200px,60%);opacity:1;margin:0 auto}
   .pyramid-stage-glow{opacity:1}
@@ -450,27 +441,6 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <div class="pyramid-glow-3"></div>
       <div class="pyramid-sweep"></div>
 
-      <!-- pirâmide-fantasma: enorme, translúcida, atrás do frasco —
-           a pirâmide passa a fazer parte do produto, não um infográfico ao lado
-           (a animação vai na <div> que envolve o SVG — xPercent/yPercent do
-           GSAP não funciona direito num <svg> puro, mesma pegadinha do
-           rotationY do frasco já documentada neste projeto) -->
-      <div class="pyramid-mega-stage" id="megaStage">
-        <svg class="pyramid-mega" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="pyGold" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
-            </linearGradient>
-          </defs>
-          <polygon class="outline" points="150,10 290,290 10,290"/>
-          <line class="divider" x1="103.33" y1="103.33" x2="196.67" y2="103.33"/>
-          <line class="divider" x1="56.67" y1="196.67" x2="243.33" y2="196.67"/>
-          <polygon class="band" id="bandTopo" points="150,10 196.67,103.33 103.33,103.33" fill="url(#pyGold)"/>
-          <polygon class="band" id="bandCoracao" points="103.33,103.33 196.67,103.33 243.33,196.67 56.67,196.67" fill="url(#pyGold)"/>
-          <polygon class="band" id="bandFundo" points="56.67,196.67 243.33,196.67 290,290 10,290" fill="url(#pyGold)"/>
-        </svg>
-      </div>
-
       <div class="pyramid-stage-glow" id="stageGlow"></div>
 
       <div class="pyramid-title-center" id="pyramidTitle">
@@ -486,20 +456,24 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
         <img class="bottle-reflection" src="assets/goodgirl-real.png" alt="" aria-hidden="true">
       </div>
 
-      <!-- as notas emergem junto ao frasco, não numa coluna de texto à parte -->
+      <!-- as notas emergem junto ao frasco, uma de cada vez, marcadas por
+           um numeral fino (I/II/III) no lugar do antigo diagrama de pirâmide -->
       <div class="pyramid-notes-scrim"></div>
       <div class="pyramid-copy">
         <div class="tier" id="tierTopo">
+          <span class="tier-num">I</span>
           <span class="eyebrow">Notas de Topo</span>
           <div class="n-name">Amêndoa &amp; Café</div>
           <div class="n-tag">Intrigante</div>
         </div>
         <div class="tier" id="tierCoracao">
+          <span class="tier-num">II</span>
           <span class="eyebrow">Notas de Coração</span>
           <div class="n-name">Jasmim &amp; Tuberosa</div>
           <div class="n-tag">Sedutora</div>
         </div>
         <div class="tier" id="tierFundo">
+          <span class="tier-num">III</span>
           <span class="eyebrow">Notas de Fundo</span>
           <div class="n-name">Fava-tonca &amp; Cacau</div>
           <div class="n-tag">Marcante</div>
@@ -841,7 +815,6 @@ if(!reduced && window.gsap){
      a centralização — mesma pegadinha do translateX(-50%) já documentada
      neste projeto */
   gsap.set('#bottleStage',{xPercent:-50,yPercent:-50});
-  gsap.set('#megaStage',{xPercent:-50,yPercent:-50});
   gsap.set('#pyramidTitle',{xPercent:-50});
 
   const pyTl = gsap.timeline({
@@ -863,15 +836,12 @@ if(!reduced && window.gsap){
   pyTl.to('#pyMist2',{scale:0,opacity:0,duration:.18,ease:'power1.in'},.02);
   pyTl.to('#pyMist3',{scale:0,opacity:0,duration:.16,ease:'power1.in'},.04);
 
-  /* 0–20% — entrada: o frasco sobe e cresce no centro do palco enquanto a
-     pirâmide-fantasma e o título nascem atrás dele — uma cena só, não
-     elementos entrando cada um por conta própria */
+  /* 0–20% — entrada: o frasco sobe e cresce no centro do palco enquanto o
+     título nasce atrás dele — uma cena só, não elementos entrando cada um
+     por conta própria */
   pyTl.fromTo('#bottleStage',
     {opacity:0,y:70,scale:.82,xPercent:-50,yPercent:-50},
     {opacity:1,y:0,scale:1,xPercent:-50,yPercent:-50,duration:.2,ease:'power2.out'},.02);
-  pyTl.fromTo('#megaStage',
-    {opacity:0,scale:.9,xPercent:-50,yPercent:-50},
-    {opacity:1,scale:1,xPercent:-50,yPercent:-50,duration:.24,ease:'power1.out'},.02);
   pyTl.fromTo('#pyramidTitle',
     {opacity:0,y:-16,xPercent:-50},
     {opacity:1,y:0,xPercent:-50,duration:.16,ease:'power2.out'},.04);
@@ -900,18 +870,15 @@ if(!reduced && window.gsap){
 
   /* 14–32% — Notas de Topo, reveladas já com a névoa dissolvida */
   pyTl.fromTo('#tierTopo',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.14);
-  pyTl.to('#bandTopo',{opacity:.6,duration:.1},.14);
   pyTl.to('#tierTopo',{opacity:0,y:-18,duration:.08},.32);
 
   /* 36–60% — Notas de Coração */
   pyTl.fromTo('#tierCoracao',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.36);
-  pyTl.to('#bandCoracao',{opacity:.6,duration:.1},.36);
   pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(216,176,154,.18), transparent 55%)',duration:.2},.36);
   pyTl.to('#tierCoracao',{opacity:0,y:-18,duration:.08},.60);
 
   /* 68–100% — Notas de Fundo: permanece, como o rastro que dura mais na pele */
   pyTl.fromTo('#tierFundo',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.68);
-  pyTl.to('#bandFundo',{opacity:.6,duration:.12},.68);
   pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(201,164,92,.2), transparent 55%)',duration:.2},.68);
 
   gsap.to('#pyramidMeterFill',{height:'100%',scrollTrigger:{
@@ -922,7 +889,6 @@ if(!reduced && window.gsap){
   document.getElementById('stageGlow').style.opacity=1;
   /* cada nota revela na sua vez ao entrar na tela, em vez de tudo de uma vez */
   document.querySelectorAll('.pyramid-copy .tier').forEach((el,i)=>{el.dataset.d=i*120;io.observe(el)});
-  document.querySelectorAll('.pyramid-mega .band').forEach(b=>{b.style.opacity=.5});
 }
 
 /* ---------- ATO: vídeo real escrubado pelo scroll ---------- */
