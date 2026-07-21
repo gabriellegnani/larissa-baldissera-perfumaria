@@ -356,7 +356,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .brand-row .note-txt{display:none}
 }
 @media (prefers-reduced-motion: reduce){
-  .grain,.hero-halo,.marquee-track,.loja-visual .orbit,.loja-visual img{animation:none!important}
+  .grain,.hero-halo,.loja-visual .orbit,.loja-visual img{animation:none!important}
   .hero{height:auto}
   .hero-pin{position:relative;height:auto;padding:140px 0}
   .pyramid{height:auto}
@@ -695,7 +695,9 @@ document.querySelectorAll('.kit').forEach((el,i)=>{el.dataset.d=i*130;io.observe
 document.querySelectorAll('.colecao-card').forEach((el,i)=>{el.dataset.d=i*100;io.observe(el)});
 document.querySelectorAll('.info-list li').forEach((el,i)=>{el.dataset.d=i*100;io.observe(el)});
 
-/* ---------- partículas douradas ambiente (dust), reutilizável entre seções ---------- */
+/* ---------- partículas douradas ambiente (dust), reutilizável entre seções ----------
+   cada canvas só roda seu próprio rAF enquanto está perto da viewport (IntersectionObserver);
+   fora da tela o loop simplesmente para de se reagendar, em vez de rodar pra sempre. */
 function initDust(canvasId){
   const dust = document.getElementById(canvasId);
   if(!dust) return;
@@ -708,7 +710,9 @@ function initDust(canvasId){
       vx:(Math.random()-.5)*.0004,vy:-.0002-Math.random()*.0005,
       tw:Math.random()*6.28,tws:.01+Math.random()*.03});
   }
-  if(!reduced)(function dustLoop(){
+  let running=false;
+  function dustLoop(){
+    if(!running) return;
     dctx.clearRect(0,0,DW,DH);
     dustP.forEach(p=>{
       p.x+=p.vx;p.y+=p.vy;p.tw+=p.tws;
@@ -718,7 +722,15 @@ function initDust(canvasId){
       dctx.beginPath();dctx.arc(p.x*DW,p.y*DH,p.r,0,7);dctx.fill();
     });
     requestAnimationFrame(dustLoop);
-  })();
+  }
+  if(!reduced){
+    new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !running){ running=true; dustLoop(); }
+        else if(!e.isIntersecting){ running=false; }
+      });
+    },{rootMargin:'200px 0px'}).observe(dust);
+  }
 }
 initDust('dustCanvas');
 initDust('pyramidDust');
@@ -730,7 +742,9 @@ let PW,PH,petals=[];
 function sizePetal(){PW=petalC.width=petalC.offsetWidth;PH=petalC.height=petalC.offsetHeight}
 sizePetal();addEventListener('resize',sizePetal);
 let petalEmit = 0; // 0..1, controlado pela timeline do Ato — intensifica quando o vídeo mostra as pétalas
-if(!reduced)(function petalLoop(){
+let petalRunning=false;
+function petalLoop(){
+  if(!petalRunning) return;
   pctx.clearRect(0,0,PW,PH);
   if(petalEmit>.02){
     const n = Math.round(petalEmit*1.4);
@@ -758,7 +772,15 @@ if(!reduced)(function petalLoop(){
     pctx.restore();
   });
   requestAnimationFrame(petalLoop);
-})();
+}
+if(!reduced){
+  new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !petalRunning){ petalRunning=true; petalLoop(); }
+      else if(!e.isIntersecting){ petalRunning=false; }
+    });
+  },{rootMargin:'200px 0px'}).observe(petalC);
+}
 
 /* ---------- HERO: vídeo real escrubado pelo scroll ---------- */
 if(!reduced && window.gsap){
