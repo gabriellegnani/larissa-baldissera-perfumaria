@@ -145,7 +145,6 @@ header.scrolled .brand img{width:36px;height:36px}
 .pyramid-bottle-col{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
 .pyramid-bottle-stage{perspective:1200px;width:min(220px,34vw);opacity:0}
 #bottleSvg{width:100%;display:block;filter:drop-shadow(0 40px 70px rgba(0,0,0,.5))}
-#bottleSheen{opacity:0}
 .pyramid-notes-col{position:relative;height:100%;opacity:0}
 /* diagrama: triângulo dividido em 3 faixas que se acendem conforme a pirâmide "desce" */
 .pyramid-diagram{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:min(150px,28vw)}
@@ -395,49 +394,11 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
     </div>
 
     <div class="pyramid-split">
-      <!-- lado A: ilustração original do frasco (silhueta inspirada no "sapatinho"),
+      <!-- lado A: foto real do frasco Good Girl (Instagram da própria Larissa),
            gira lateralmente conforme o scroll -->
       <div class="pyramid-bottle-col">
         <div class="pyramid-bottle-stage" id="bottleStage">
-          <svg class="pyramid-bottle" id="bottleSvg" viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="bottleGlass" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#2a2760"/><stop offset=".5" stop-color="#191740"/><stop offset="1" stop-color="#100e2c"/>
-              </linearGradient>
-              <linearGradient id="bottleGold" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#e8d3a2"/><stop offset=".5" stop-color="#c9a45c"/><stop offset="1" stop-color="#8f713a"/>
-              </linearGradient>
-              <linearGradient id="bottleLiquid" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
-              </linearGradient>
-              <linearGradient id="bottleSheenG" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="rgba(246,241,231,0)"/>
-                <stop offset=".5" stop-color="rgba(246,241,231,.32)"/>
-                <stop offset="1" stop-color="rgba(246,241,231,0)"/>
-              </linearGradient>
-              <clipPath id="bottleBodyClip">
-                <path d="M88,68 C88,68 152,68 152,68 L160,232 C160,254 146,268 120,268 C94,268 80,254 80,232 Z"/>
-              </clipPath>
-            </defs>
-            <!-- "salto": curva inspirada em silhueta de sapatinho, saindo da base do frasco -->
-            <path d="M148,270 C176,282 198,318 192,362 C190,376 180,384 168,380 C160,377 158,367 161,354 C167,326 156,300 132,278 Z" fill="url(#bottleGold)" opacity=".92"/>
-            <!-- "sola": linha fina sob o corpo, ecoando a sola de um sapato -->
-            <path d="M80,272 C104,282 148,282 168,270" fill="none" stroke="url(#bottleGold)" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-            <!-- tampa -->
-            <rect x="98" y="16" width="44" height="30" rx="6" fill="url(#bottleGold)"/>
-            <!-- gargalo -->
-            <rect x="106" y="46" width="28" height="22" rx="2" fill="url(#bottleGold)"/>
-            <!-- corpo de vidro -->
-            <path d="M88,68 C88,68 152,68 152,68 L160,232 C160,254 146,268 120,268 C94,268 80,254 80,232 Z" fill="url(#bottleGlass)" stroke="rgba(201,164,92,.5)" stroke-width="1.5"/>
-            <!-- líquido -->
-            <path d="M84,178 L156,178 L158,232 C158,251 144,264 120,264 C96,264 82,251 82,232 Z" fill="url(#bottleLiquid)" opacity=".88"/>
-            <!-- reflexo fixo -->
-            <path d="M98,80 C94,130 93,200 97,250" stroke="rgba(246,241,231,.35)" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <!-- sheen: percorre a superfície conforme o frasco gira -->
-            <g clip-path="url(#bottleBodyClip)">
-              <rect id="bottleSheen" x="-40" y="60" width="60" height="220" fill="url(#bottleSheenG)" transform="skewX(-14)"/>
-            </g>
-          </svg>
+          <img class="pyramid-bottle" id="bottleSvg" src="assets/goodgirl-real.png" alt="Good Girl — Carolina Herrera">
         </div>
       </div>
 
@@ -816,15 +777,15 @@ if(!reduced && window.gsap){
 
   /* o frasco já gira desde o início — o giro atravessa a entrada e continua
      até o fim da seção, como um produto girando devagar numa vitrine
-     (rotação 3D vai na <div> que envolve o SVG — em SVG puro o rotationY
-     do GSAP não tem efeito nenhum) */
-  const sheen = document.getElementById('bottleSheen');
+     (rotação 3D vai na <div> que envolve o SVG — em SVG/IMG puro o
+     rotationY do GSAP não tem efeito nenhum). O brilho da própria foto
+     acompanha o giro: mais luminoso de frente, mais discreto de perfil */
+  const bottleImg = document.getElementById('bottleSvg');
   pyTl.fromTo('#bottleStage',{rotationY:-20},{rotationY:20,duration:1,ease:'none',
     onUpdate:function(){
       const rot = gsap.getProperty('#bottleStage','rotationY');
       const t = (rot+20)/40; // 0..1
-      sheen.setAttribute('x', -40 + t*120);
-      sheen.style.opacity = .12 + .68*Math.sin(t*Math.PI);
+      bottleImg.style.filter = 'brightness(' + (1 + .14*Math.sin(t*Math.PI)) + ') drop-shadow(0 40px 70px rgba(0,0,0,.5))';
     }
   },0);
 
