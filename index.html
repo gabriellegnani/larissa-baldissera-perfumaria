@@ -130,91 +130,90 @@ header.scrolled .brand img{width:36px;height:36px}
 
 
 
-/* ============ SEÇÃO 2: A PIRÂMIDE OLFATIVA ============ */
+/* ============ SEÇÃO 2: A PIRÂMIDE OLFATIVA — palco único, cinematográfico ============ */
 .pyramid{position:relative;z-index:2;height:300vh}
 .pyramid-pin{position:sticky;top:0;height:100vh;overflow:hidden}
-.pyramid-bg{position:absolute;inset:0;background:linear-gradient(175deg,#0e0d24,#171233 55%,#0e0d24)}
+.pyramid-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 65% at 50% 46%, #1c1a45, #0e0d24 70%)}
 .pyramid-glow{
   position:absolute;left:50%;top:40%;width:110vmin;height:110vmin;
   transform:translate(-50%,-50%);pointer-events:none;
   background:radial-gradient(circle, rgba(201,164,92,.14), transparent 55%);
 }
 #pyramidDust{position:absolute;inset:0;pointer-events:none}
-/* ============ palco único: frasco e pirâmide na mesma luz ============ */
-/* brumas assimétricas de fundo — quebram a uniformidade, dão profundidade */
+/* brumas assimétricas + feixe de luz — quebram a uniformidade do fundo */
 .pyramid-glow-2{
-  position:absolute;left:20%;top:20%;width:56vmin;height:56vmin;
+  position:absolute;left:12%;top:16%;width:62vmin;height:62vmin;
   transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(circle, rgba(232,211,162,.10), transparent 62%);
+  background:radial-gradient(circle, rgba(232,211,162,.11), transparent 62%);
 }
 .pyramid-glow-3{
-  position:absolute;left:82%;top:76%;width:64vmin;height:64vmin;
+  position:absolute;left:90%;top:84%;width:68vmin;height:68vmin;
   transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(circle, rgba(216,176,154,.09), transparent 62%);
+  background:radial-gradient(circle, rgba(216,176,154,.10), transparent 62%);
 }
-/* feixe de luz diagonal, bem sutil — sensação de iluminação de estúdio */
 .pyramid-sweep{
   position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg, transparent 32%, rgba(232,211,162,.05) 48%, transparent 64%);
+  background:linear-gradient(115deg, transparent 28%, rgba(232,211,162,.06) 50%, transparent 68%);
 }
-/* linha-eixo dourada entre as duas colunas — costura visualmente o frasco à pirâmide */
-.pyramid-seam{
-  position:absolute;left:50%;top:12%;bottom:12%;width:1px;
-  transform:translateX(-50%);pointer-events:none;
-  background:linear-gradient(rgba(201,164,92,0), rgba(201,164,92,.22) 35%, rgba(201,164,92,.22) 65%, rgba(201,164,92,0));
+/* palco central: tudo no mesmo eixo — o frasco é o protagonista absoluto */
+.pyramid-stage{position:absolute;inset:0;z-index:1}
+/* pirâmide-fantasma: enorme e translúcida, atrás do frasco — a pirâmide
+   deixa de ser um infográfico ao lado e passa a fazer parte do produto */
+.pyramid-mega-stage{
+  position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);
+  width:min(640px,88vw);z-index:1;opacity:0;pointer-events:none;
 }
-/* poça de luz no "chão" compartilhado — frasco e pirâmide parecem estar na mesma vitrine */
+.pyramid-mega{width:100%;display:block}
+.pyramid-mega .outline{fill:none;stroke:rgba(201,164,92,.22);stroke-width:1}
+.pyramid-mega .divider{stroke:rgba(201,164,92,.14);stroke-width:1}
+.pyramid-mega .band{opacity:.05}
+/* poça de luz sob o frasco — o "chão" da vitrine */
 .pyramid-stage-glow{
-  position:absolute;left:50%;bottom:10%;width:88%;max-width:860px;height:190px;
+  position:absolute;left:50%;bottom:20%;width:64%;max-width:580px;height:150px;
   transform:translateX(-50%);pointer-events:none;border-radius:50%;
-  background:radial-gradient(ellipse closest-side, rgba(201,164,92,.20), transparent 70%);
-  filter:blur(2px);opacity:0;
+  background:radial-gradient(ellipse closest-side, rgba(201,164,92,.26), transparent 70%);
+  filter:blur(3px);opacity:0;z-index:2;
 }
-/* dois lados: o frasco (foto real) e a pirâmide */
-.pyramid-split{position:absolute;inset:0;z-index:1;display:grid;grid-template-columns:1fr 1fr}
-.pyramid-bottle-col{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
-.pyramid-bottle-stage{position:relative;perspective:1200px;width:min(300px,42vw);opacity:0}
-/* halo vertical atrás do frasco, como um spot de vitrine */
+.pyramid-title-center{
+  position:absolute;left:50%;top:7%;transform:translateX(-50%);
+  text-align:center;z-index:5;width:min(440px,86vw);opacity:0;
+}
+.pyramid-title-center h2{font-size:clamp(1.6rem,2.8vw,2.2rem);margin-top:10px;line-height:1.15}
+.pyramid-title-center h2 em{font-style:italic;color:var(--gold-2)}
+/* o frasco: grande, centrado, na frente da pirâmide-fantasma */
+.pyramid-bottle-stage{
+  position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);
+  perspective:1200px;width:min(270px,36vw);opacity:0;z-index:3;
+}
 .bottle-spotlight{
-  position:absolute;left:50%;top:52%;width:150%;height:135%;z-index:-1;
+  position:absolute;left:50%;top:50%;width:175%;height:150%;z-index:-1;
   transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(ellipse 42% 58% at 50% 55%, rgba(232,211,162,.22), transparent 68%);
+  background:radial-gradient(ellipse 42% 58% at 50% 55%, rgba(232,211,162,.28), transparent 68%);
 }
-#bottleSvg{width:100%;display:block;filter:drop-shadow(0 40px 70px rgba(0,0,0,.5))}
+#bottleSvg{width:100%;display:block;filter:drop-shadow(0 50px 80px rgba(0,0,0,.55)) drop-shadow(0 0 30px rgba(232,211,162,.18))}
 /* reflexo espelhado, como se o frasco estivesse sobre uma superfície polida */
 .bottle-reflection{
   position:absolute;left:0;top:100%;width:100%;display:block;
-  transform:scaleY(-1);filter:blur(2px);opacity:.38;pointer-events:none;
+  transform:scaleY(-1);filter:blur(2px);opacity:.42;pointer-events:none;
   -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 60%);
   mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 60%);
 }
-.pyramid-notes-col{position:relative;height:100%;opacity:0}
-/* halo amplo por trás do diagrama+notas, na mesma luz do frasco */
-.pyramid-diagram-glow{
-  position:absolute;left:50%;top:46%;width:120%;height:70%;
-  transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(ellipse 55% 60% at 50% 50%, rgba(201,164,92,.12), transparent 68%);
+/* véu escuro atrás das notas — legibilidade sobre o palco iluminado,
+   as notas emergem junto ao frasco em vez de numa coluna de texto à parte */
+.pyramid-notes-scrim{
+  position:absolute;left:0;right:0;bottom:0;height:44%;z-index:4;pointer-events:none;
+  background:linear-gradient(to top, rgba(14,13,36,.94), rgba(14,13,36,.55) 55%, transparent);
 }
-/* diagrama: triângulo dividido em 3 faixas que se acendem conforme a pirâmide "desce" */
-.pyramid-diagram{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);width:min(170px,30vw)}
-.pyramid-diagram .outline{fill:none;stroke:var(--line);stroke-width:1.5}
-.pyramid-diagram .divider{stroke:var(--line);stroke-width:1}
-.pyramid-diagram .band{opacity:.08;filter:drop-shadow(0 0 0 transparent)}
-/* título da seção — a primeira coisa a "nascer" */
-.pyramid-title{
-  position:absolute;left:50%;top:8%;transform:translateX(-50%);
-  text-align:center;z-index:2;width:min(420px,84vw);
+.pyramid-copy{
+  position:absolute;left:50%;bottom:7%;transform:translateX(-50%);
+  text-align:center;width:min(520px,88vw);z-index:5;
 }
-.pyramid-title h2{font-size:clamp(1.7rem,3vw,2.3rem);margin-top:10px;line-height:1.15}
-.pyramid-title h2 em{font-style:italic;color:var(--gold-2)}
-/* textos das camadas */
-.pyramid-copy{position:absolute;left:50%;top:68%;transform:translateX(-50%);text-align:center;width:min(520px,86vw)}
-.pyramid-copy .tier{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(24px) scale(.94)}
+.pyramid-copy .tier{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(24px) scale(.94)}
 .pyramid-copy .tier.inview{opacity:1;transform:translateY(0) scale(1);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
-.pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.8rem,3.6vw,2.6rem);margin-top:16px}
+.pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.9rem,3.8vw,2.8rem);margin-top:16px}
 .pyramid-copy .n-tag{font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(246,241,231,.55);margin-top:10px}
 .pyramid-meter{
-  position:absolute;right:44px;top:50%;transform:translateY(-50%);
+  position:absolute;right:44px;top:50%;transform:translateY(-50%);z-index:5;
   display:flex;flex-direction:column;align-items:center;gap:14px;
 }
 .pyramid-meter .track{width:1px;height:160px;background:rgba(246,241,231,.15);position:relative}
@@ -349,8 +348,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .act-meter{right:18px}
   .kit-grid{grid-template-columns:1fr}
   .colecao-grid{grid-template-columns:1fr}
-  .pyramid-split{grid-template-columns:1fr}
-  .pyramid-bottle-col{display:none}
+  .pyramid-mega-stage{width:min(480px,94vw)}
+  .pyramid-bottle-stage{width:min(190px,44vw)}
   .loja-grid{grid-template-columns:1fr;gap:50px}
   .brand-row{grid-template-columns:44px 1fr;gap:16px}
   .brand-row .note-txt{display:none}
@@ -361,16 +360,15 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .hero-pin{position:relative;height:auto;padding:140px 0}
   .pyramid{height:auto}
   .pyramid-pin{position:relative;height:auto;padding:120px 0}
-  .pyramid-split{position:relative;display:grid}
-  .pyramid-bottle-col{position:relative;height:auto;display:flex;align-items:center;justify-content:center;padding:40px 0}
-  .pyramid-bottle-stage{width:min(200px,80%);opacity:1}
+  .pyramid-stage{position:relative;display:block;padding:60px 0}
+  .pyramid-mega-stage{display:none}
+  .pyramid-title-center{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px;opacity:1}
+  .pyramid-bottle-stage{position:relative;left:auto;top:auto;transform:none;width:min(200px,60%);opacity:1;margin:0 auto}
   .pyramid-stage-glow{opacity:1}
   .bottle-reflection{display:none}
-  .pyramid-notes-col{position:relative;height:auto;opacity:1;padding:40px 0}
-  .pyramid-title{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px}
-  .pyramid-diagram{position:relative;display:block;left:auto;top:auto;transform:none;margin:0 auto 40px}
-  .pyramid-copy{position:relative;left:auto;top:auto;transform:none;margin:0 auto;min-height:0}
-  .pyramid-copy .tier{position:relative;left:auto;top:auto;width:auto;margin:0 auto 60px}
+  .pyramid-notes-scrim{display:none}
+  .pyramid-copy{position:relative;left:auto;bottom:auto;transform:none;margin:50px auto 0;min-height:0}
+  .pyramid-copy .tier{position:relative;left:auto;bottom:auto;width:auto;margin:0 auto 60px}
   .pyramid-meter{display:none}
   .mist-bridge{display:none}
   .act{height:auto}
@@ -445,29 +443,19 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <div class="layer m3" id="pyMist3"></div>
     </div>
 
-    <div class="pyramid-split">
-      <!-- atmosfera compartilhada: dá profundidade e costura as duas colunas
-           numa composição só, em vez de dois elementos independentes -->
+    <div class="pyramid-stage">
+      <!-- atmosfera: dá profundidade ao fundo -->
       <div class="pyramid-glow-2"></div>
       <div class="pyramid-glow-3"></div>
       <div class="pyramid-sweep"></div>
-      <div class="pyramid-seam"></div>
-      <div class="pyramid-stage-glow" id="stageGlow"></div>
 
-      <!-- lado A: foto real do frasco Good Girl (Instagram da própria Larissa),
-           gira lateralmente conforme o scroll, com spot de luz e reflexo -->
-      <div class="pyramid-bottle-col">
-        <div class="pyramid-bottle-stage" id="bottleStage">
-          <div class="bottle-spotlight"></div>
-          <img class="pyramid-bottle" id="bottleSvg" src="assets/goodgirl-real.png" alt="Good Girl — Carolina Herrera">
-          <img class="bottle-reflection" src="assets/goodgirl-real.png" alt="" aria-hidden="true">
-        </div>
-      </div>
-
-      <!-- lado B: a pirâmide olfativa, na mesma luz do frasco -->
-      <div class="pyramid-notes-col">
-        <div class="pyramid-diagram-glow"></div>
-        <svg class="pyramid-diagram" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- pirâmide-fantasma: enorme, translúcida, atrás do frasco —
+           a pirâmide passa a fazer parte do produto, não um infográfico ao lado
+           (a animação vai na <div> que envolve o SVG — xPercent/yPercent do
+           GSAP não funciona direito num <svg> puro, mesma pegadinha do
+           rotationY do frasco já documentada neste projeto) -->
+      <div class="pyramid-mega-stage" id="megaStage">
+        <svg class="pyramid-mega" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="pyGold" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stop-color="#e8d3a2"/><stop offset="1" stop-color="#c9a45c"/>
@@ -480,28 +468,40 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
           <polygon class="band" id="bandCoracao" points="103.33,103.33 196.67,103.33 243.33,196.67 56.67,196.67" fill="url(#pyGold)"/>
           <polygon class="band" id="bandFundo" points="56.67,196.67 243.33,196.67 290,290 10,290" fill="url(#pyGold)"/>
         </svg>
+      </div>
 
-        <div class="pyramid-title">
-          <span class="eyebrow">Good Girl · Carolina Herrera</span>
-          <h2>Pirâmide <em>Olfativa</em></h2>
+      <div class="pyramid-stage-glow" id="stageGlow"></div>
+
+      <div class="pyramid-title-center" id="pyramidTitle">
+        <span class="eyebrow">Good Girl · Carolina Herrera</span>
+        <h2>Pirâmide <em>Olfativa</em></h2>
+      </div>
+
+      <!-- o frasco: protagonista absoluto, foto real (Instagram da própria
+           Larissa), gira lateralmente conforme o scroll -->
+      <div class="pyramid-bottle-stage" id="bottleStage">
+        <div class="bottle-spotlight"></div>
+        <img class="pyramid-bottle" id="bottleSvg" src="assets/goodgirl-real.png" alt="Good Girl — Carolina Herrera">
+        <img class="bottle-reflection" src="assets/goodgirl-real.png" alt="" aria-hidden="true">
+      </div>
+
+      <!-- as notas emergem junto ao frasco, não numa coluna de texto à parte -->
+      <div class="pyramid-notes-scrim"></div>
+      <div class="pyramid-copy">
+        <div class="tier" id="tierTopo">
+          <span class="eyebrow">Notas de Topo</span>
+          <div class="n-name">Amêndoa &amp; Café</div>
+          <div class="n-tag">Intrigante</div>
         </div>
-
-        <div class="pyramid-copy">
-          <div class="tier" id="tierTopo">
-            <span class="eyebrow">Notas de Topo</span>
-            <div class="n-name">Amêndoa &amp; Café</div>
-            <div class="n-tag">Intrigante</div>
-          </div>
-          <div class="tier" id="tierCoracao">
-            <span class="eyebrow">Notas de Coração</span>
-            <div class="n-name">Jasmim &amp; Tuberosa</div>
-            <div class="n-tag">Sedutora</div>
-          </div>
-          <div class="tier" id="tierFundo">
-            <span class="eyebrow">Notas de Fundo</span>
-            <div class="n-name">Fava-tonca &amp; Cacau</div>
-            <div class="n-tag">Marcante</div>
-          </div>
+        <div class="tier" id="tierCoracao">
+          <span class="eyebrow">Notas de Coração</span>
+          <div class="n-name">Jasmim &amp; Tuberosa</div>
+          <div class="n-tag">Sedutora</div>
+        </div>
+        <div class="tier" id="tierFundo">
+          <span class="eyebrow">Notas de Fundo</span>
+          <div class="n-name">Fava-tonca &amp; Cacau</div>
+          <div class="n-tag">Marcante</div>
         </div>
       </div>
     </div>
@@ -810,6 +810,15 @@ if(!reduced && window.gsap){
 if(!reduced && window.gsap){
   gsap.registerPlugin(ScrollTrigger);
 
+  /* o frasco e a pirâmide-fantasma se centralizam via CSS transform;
+     fixamos esse centro no cache do GSAP ANTES de qualquer tween tocar
+     essas transforms, senão a primeira animação (rotationY/scale) apaga
+     a centralização — mesma pegadinha do translateX(-50%) já documentada
+     neste projeto */
+  gsap.set('#bottleStage',{xPercent:-50,yPercent:-50});
+  gsap.set('#megaStage',{xPercent:-50,yPercent:-50});
+  gsap.set('#pyramidTitle',{xPercent:-50});
+
   const pyTl = gsap.timeline({
     scrollTrigger:{
       trigger:'#notas',
@@ -829,14 +838,18 @@ if(!reduced && window.gsap){
   pyTl.to('#pyMist2',{scale:0,opacity:0,duration:.18,ease:'power1.in'},.02);
   pyTl.to('#pyMist3',{scale:0,opacity:0,duration:.16,ease:'power1.in'},.04);
 
-  /* 0–18% — entrada: o frasco sobe e cresce levemente enquanto a pirâmide
-     desliza da direita — as duas metades "nascem" juntas, uma reação só */
+  /* 0–20% — entrada: o frasco sobe e cresce no centro do palco enquanto a
+     pirâmide-fantasma e o título nascem atrás dele — uma cena só, não
+     elementos entrando cada um por conta própria */
   pyTl.fromTo('#bottleStage',
-    {opacity:0,y:70,scale:.82},
-    {opacity:1,y:0,scale:1,duration:.18,ease:'power2.out'},.02);
-  pyTl.fromTo('.pyramid-notes-col',
-    {opacity:0,x:70},
-    {opacity:1,x:0,duration:.18,ease:'power2.out'},.02);
+    {opacity:0,y:70,scale:.82,xPercent:-50,yPercent:-50},
+    {opacity:1,y:0,scale:1,xPercent:-50,yPercent:-50,duration:.2,ease:'power2.out'},.02);
+  pyTl.fromTo('#megaStage',
+    {opacity:0,scale:.9,xPercent:-50,yPercent:-50},
+    {opacity:1,scale:1,xPercent:-50,yPercent:-50,duration:.24,ease:'power1.out'},.02);
+  pyTl.fromTo('#pyramidTitle',
+    {opacity:0,y:-16,xPercent:-50},
+    {opacity:1,y:0,xPercent:-50,duration:.16,ease:'power2.out'},.04);
 
   /* o frasco já gira desde o início — o giro atravessa a entrada e continua
      até o fim da seção, como um produto girando devagar numa vitrine
@@ -879,12 +892,12 @@ if(!reduced && window.gsap){
   gsap.to('#pyramidMeterFill',{height:'100%',scrollTrigger:{
     trigger:'#notas',start:'top top',end:'bottom bottom',scrub:true}});
 }else{
-  document.querySelector('.pyramid-notes-col').style.opacity=1;
+  document.getElementById('pyramidTitle').style.opacity=1;
   document.getElementById('bottleStage').style.opacity=1;
   document.getElementById('stageGlow').style.opacity=1;
   /* cada nota revela na sua vez ao entrar na tela, em vez de tudo de uma vez */
   document.querySelectorAll('.pyramid-copy .tier').forEach((el,i)=>{el.dataset.d=i*120;io.observe(el)});
-  document.querySelectorAll('.pyramid-diagram .band').forEach(b=>{b.style.opacity=.5});
+  document.querySelectorAll('.pyramid-mega .band').forEach(b=>{b.style.opacity=.5});
 }
 
 /* ---------- ATO: vídeo real escrubado pelo scroll ---------- */
