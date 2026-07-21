@@ -162,6 +162,7 @@ header.scrolled .brand img{width:36px;height:36px}
 /* textos das camadas */
 .pyramid-copy{position:absolute;left:50%;top:68%;transform:translateX(-50%);text-align:center;width:min(520px,86vw)}
 .pyramid-copy .tier{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(24px)}
+.pyramid-copy .tier.inview{opacity:1;transform:translateY(0);transition:opacity .8s ease,transform .8s ease}
 .pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.8rem,3.6vw,2.6rem);margin-top:16px}
 .pyramid-copy .n-tag{font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(246,241,231,.55);margin-top:10px}
 .pyramid-meter{
@@ -313,11 +314,13 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .pyramid{height:auto}
   .pyramid-pin{position:relative;height:auto;padding:120px 0}
   .pyramid-split{position:relative;display:block}
-  .pyramid-bottle-col{display:none}
+  .pyramid-bottle-col{position:relative;height:auto;padding:30px 0}
+  .pyramid-bottle-stage{margin:0 auto;opacity:1}
   .pyramid-notes-col{position:relative;height:auto;opacity:1;padding:20px 0}
   .pyramid-title{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px}
   .pyramid-diagram{position:relative;display:block;left:auto;top:auto;transform:none;margin:0 auto 40px}
-  .pyramid-copy{position:relative;left:auto;top:auto;transform:none;margin:0 auto}
+  .pyramid-copy{position:relative;left:auto;top:auto;transform:none;margin:0 auto;min-height:0}
+  .pyramid-copy .tier{position:relative;left:auto;top:auto;width:auto;margin:0 auto 60px}
   .pyramid-meter{display:none}
   .mist-bridge{display:none}
   .act{height:auto}
@@ -851,9 +854,8 @@ if(!reduced && window.gsap){
 }else{
   document.querySelector('.pyramid-notes-col').style.opacity=1;
   document.getElementById('bottleStage').style.opacity=1;
-  document.querySelectorAll('.pyramid-copy .tier').forEach(el=>{
-    el.style.opacity=1;el.style.position='relative';el.style.margin='0 auto 40px';el.style.transform='none';
-  });
+  /* cada nota revela na sua vez ao entrar na tela, em vez de tudo de uma vez */
+  document.querySelectorAll('.pyramid-copy .tier').forEach((el,i)=>{el.dataset.d=i*120;io.observe(el)});
   document.querySelectorAll('.pyramid-diagram .band').forEach(b=>{b.style.opacity=.5});
 }
 
