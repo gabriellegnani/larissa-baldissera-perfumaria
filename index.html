@@ -130,88 +130,21 @@ header.scrolled .brand img{width:36px;height:36px}
 
 
 
-/* ============ SEÇÃO 2: A PIRÂMIDE OLFATIVA — palco único, cinematográfico ============ */
-.pyramid{position:relative;z-index:2;height:300vh}
-.pyramid-pin{position:sticky;top:0;height:100vh;overflow:hidden}
-.pyramid-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 65% at 50% 46%, #1c1a45, #0e0d24 70%)}
-.pyramid-glow{
-  position:absolute;left:50%;top:40%;width:110vmin;height:110vmin;
-  transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(circle, rgba(201,164,92,.14), transparent 55%);
-}
-#pyramidDust{position:absolute;inset:0;pointer-events:none}
-/* brumas assimétricas + feixe de luz — quebram a uniformidade do fundo */
-.pyramid-glow-2{
-  position:absolute;left:12%;top:16%;width:62vmin;height:62vmin;
-  transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(circle, rgba(232,211,162,.11), transparent 62%);
-}
-.pyramid-glow-3{
-  position:absolute;left:90%;top:84%;width:68vmin;height:68vmin;
-  transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(circle, rgba(216,176,154,.10), transparent 62%);
-}
-.pyramid-sweep{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg, transparent 28%, rgba(232,211,162,.06) 50%, transparent 68%);
-}
-/* palco central: tudo no mesmo eixo — o frasco é o protagonista absoluto */
-.pyramid-stage{position:absolute;inset:0;z-index:1}
-/* poça de luz sob o frasco — o "chão" da vitrine */
-.pyramid-stage-glow{
-  position:absolute;left:50%;bottom:20%;width:64%;max-width:580px;height:150px;
-  transform:translateX(-50%);pointer-events:none;border-radius:50%;
-  background:radial-gradient(ellipse closest-side, rgba(201,164,92,.26), transparent 70%);
-  filter:blur(3px);opacity:0;z-index:2;
-}
-.pyramid-title-center{
-  position:absolute;left:50%;top:7%;transform:translateX(-50%);
-  text-align:center;z-index:5;width:min(440px,86vw);opacity:0;
-}
-.pyramid-title-center h2{font-size:clamp(1.6rem,2.8vw,2.2rem);margin-top:10px;line-height:1.15}
-.pyramid-title-center h2 em{font-style:italic;color:var(--gold-2)}
-/* o frasco: grande, centrado, na frente da pirâmide-fantasma */
-.pyramid-bottle-stage{
-  position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);
-  perspective:1200px;width:min(270px,36vw);opacity:0;z-index:3;
-}
-.bottle-spotlight{
-  position:absolute;left:50%;top:50%;width:175%;height:150%;z-index:-1;
-  transform:translate(-50%,-50%);pointer-events:none;
-  background:radial-gradient(ellipse 42% 58% at 50% 55%, rgba(232,211,162,.28), transparent 68%);
-}
-#bottleSvg{width:100%;display:block;filter:drop-shadow(0 50px 80px rgba(0,0,0,.55)) drop-shadow(0 0 30px rgba(232,211,162,.18))}
-/* reflexo espelhado, como se o frasco estivesse sobre uma superfície polida */
-.bottle-reflection{
-  position:absolute;left:0;top:100%;width:100%;display:block;
-  transform:scaleY(-1);filter:blur(2px);opacity:.42;pointer-events:none;
-  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 60%);
-  mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 60%);
-}
-/* véu escuro atrás das notas — legibilidade sobre o palco iluminado,
-   as notas emergem junto ao frasco em vez de numa coluna de texto à parte */
-.pyramid-notes-scrim{
-  position:absolute;left:0;right:0;bottom:0;height:44%;z-index:4;pointer-events:none;
-  background:linear-gradient(to top, rgba(14,13,36,.94), rgba(14,13,36,.55) 55%, transparent);
-}
-.pyramid-copy{
-  position:absolute;left:50%;bottom:7%;transform:translateX(-50%);
-  text-align:center;width:min(520px,88vw);z-index:5;
-}
-.pyramid-copy .tier{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(24px) scale(.94)}
-.pyramid-copy .tier.inview{opacity:1;transform:translateY(0) scale(1);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
-/* numeral fino no lugar do diagrama — marca a hierarquia (I/II/III) sem
-   precisar desenhar uma pirâmide, funciona igual no modo estático */
-.pyramid-copy .tier-num{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.2rem,4.2vw,3.2rem);color:rgba(201,164,92,.4);line-height:1}
-.pyramid-copy .n-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-2);font-size:clamp(1.9rem,3.8vw,2.8rem);margin-top:16px}
-.pyramid-copy .n-tag{font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(246,241,231,.55);margin-top:10px}
-.pyramid-meter{
-  position:absolute;right:44px;top:50%;transform:translateY(-50%);z-index:5;
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-}
-.pyramid-meter .track{width:1px;height:160px;background:rgba(246,241,231,.15);position:relative}
-.pyramid-meter .fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--gold)}
-.pyramid-meter span{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(246,241,231,.5);font-size:.85rem;writing-mode:vertical-rl}
+/* ============ SEÇÃO 2: MENU DE PERFUMES — lista editorial, sem pin/scrub ============ */
+.menu{position:relative;z-index:2;padding:160px 0 140px}
+.menu-rows{border-top:1px solid var(--line)}
+.menu-row{display:grid;grid-template-columns:70px 1fr auto;gap:30px;align-items:center;padding:32px 10px;border-bottom:1px solid var(--line);transition:background .4s,padding-left .4s;opacity:0;transform:translateY(30px)}
+.menu-row.inview{opacity:1;transform:translateY(0);transition:opacity .8s,transform .8s,background .4s,padding-left .4s}
+.menu-row:hover{background:rgba(201,164,92,.06);padding-left:26px}
+.menu-row .idx{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1rem}
+.menu-brand{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);display:block}
+.menu-info h3{font-size:clamp(1.4rem,2.4vw,1.9rem);margin-top:6px}
+.menu-note{font-size:.68rem;letter-spacing:.16em;color:rgba(246,241,231,.5);display:block;margin-top:8px}
+.menu-cta{display:inline-flex;align-items:center;gap:14px;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-2);white-space:nowrap}
+.menu-cta .stroke{display:inline-block;width:32px;height:1px;background:var(--gold);transition:width .4s ease}
+.menu-cta:hover .stroke{width:52px}
+.menu-more{text-align:center;margin-top:50px;color:rgba(246,241,231,.6);font-size:.92rem}
+.menu-more a{color:var(--gold-2);text-decoration:underline;text-underline-offset:4px}
 
 /* ============ ATO: O BORRIFO (vídeo real) ============ */
 .act{position:relative;z-index:2;height:520vh}
@@ -342,26 +275,16 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   .act-meter{right:18px}
   .kit-grid{grid-template-columns:1fr}
   .colecao-grid{grid-template-columns:1fr}
-  .pyramid-bottle-stage{width:min(190px,44vw)}
   .loja-grid{grid-template-columns:1fr;gap:50px}
   .brand-row{grid-template-columns:44px 1fr;gap:16px}
   .brand-row .note-txt{display:none}
+  .menu-row{grid-template-columns:44px 1fr;gap:16px}
+  .menu-cta{grid-column:1/-1;margin-top:16px}
 }
 @media (prefers-reduced-motion: reduce){
   .grain,.hero-halo,.loja-visual .orbit,.loja-visual img{animation:none!important}
   .hero{height:auto}
   .hero-pin{position:relative;height:auto;padding:140px 0}
-  .pyramid{height:auto}
-  .pyramid-pin{position:relative;height:auto;padding:120px 0}
-  .pyramid-stage{position:relative;display:block;padding:60px 0}
-  .pyramid-title-center{position:relative;left:auto;top:auto;transform:none;margin:0 auto 30px;opacity:1}
-  .pyramid-bottle-stage{position:relative;left:auto;top:auto;transform:none;width:min(200px,60%);opacity:1;margin:0 auto}
-  .pyramid-stage-glow{opacity:1}
-  .bottle-reflection{display:none}
-  .pyramid-notes-scrim{display:none}
-  .pyramid-copy{position:relative;left:auto;bottom:auto;transform:none;margin:50px auto 0;min-height:0}
-  .pyramid-copy .tier{position:relative;left:auto;bottom:auto;width:auto;margin:0 auto 60px}
-  .pyramid-meter{display:none}
   .mist-bridge{display:none}
   .act{height:auto}
   .act-pin{position:relative;height:auto;padding:120px 0}
@@ -382,6 +305,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <span class="brand-name"><b>Larissa Baldissera</b><i>Perfumaria</i></span>
     </a>
     <div class="navlinks">
+      <a href="#menu">Menu</a>
       <a href="#experiencia">A Experiência</a>
       <a href="#marcas">Maisons</a>
       <a href="#colecao">Coleção</a>
@@ -421,70 +345,62 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
   </div>
 </section>
 
-<!-- ===================== SEÇÃO 2: A PIRÂMIDE OLFATIVA ===================== -->
-<section class="pyramid" id="notas">
-  <div class="pyramid-pin">
-    <div class="pyramid-bg"></div>
-    <div class="pyramid-glow" id="pyramidGlow"></div>
-    <canvas id="pyramidDust"></canvas>
-
-    <!-- continuação da mesma névoa: já nasce cobrindo a tela e se dissolve -->
-    <div class="mist-bridge" id="pyMist">
-      <div class="layer m1" id="pyMist1"></div>
-      <div class="layer m2" id="pyMist2"></div>
-      <div class="layer m3" id="pyMist3"></div>
+<!-- ===================== SEÇÃO 2: MENU DE PERFUMES ===================== -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Menu de Perfumes</span>
+      <h2>Escolha o seu, <em>fale com a Larissa</em></h2>
+      <p>Uma seleção da curadoria da loja — disponibilidade, preço e envio combinados direto pelo WhatsApp.</p>
     </div>
-
-    <div class="pyramid-stage">
-      <!-- atmosfera: dá profundidade ao fundo -->
-      <div class="pyramid-glow-2"></div>
-      <div class="pyramid-glow-3"></div>
-      <div class="pyramid-sweep"></div>
-
-      <div class="pyramid-stage-glow" id="stageGlow"></div>
-
-      <div class="pyramid-title-center" id="pyramidTitle">
-        <span class="eyebrow">Good Girl · Carolina Herrera</span>
-        <h2>Pirâmide <em>Olfativa</em></h2>
+    <div class="menu-rows">
+      <div class="menu-row">
+        <span class="idx">Nº 01</span>
+        <div class="menu-info">
+          <span class="menu-brand">Carolina Herrera</span>
+          <h3>Good Girl</h3>
+          <span class="menu-note">Amêndoa · Jasmim · Fava-tonca</span>
+        </div>
+        <a class="menu-cta" href="https://wa.me/5549999427624?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Good%20Girl%2C%20da%20Carolina%20Herrera." target="_blank" rel="noopener">Pedir<span class="stroke"></span></a>
       </div>
-
-      <!-- o frasco: protagonista absoluto, foto real (Instagram da própria
-           Larissa), gira lateralmente conforme o scroll -->
-      <div class="pyramid-bottle-stage" id="bottleStage">
-        <div class="bottle-spotlight"></div>
-        <img class="pyramid-bottle" id="bottleSvg" src="assets/goodgirl-real.png" alt="Good Girl — Carolina Herrera">
-        <img class="bottle-reflection" src="assets/goodgirl-real.png" alt="" aria-hidden="true">
+      <div class="menu-row">
+        <span class="idx">Nº 02</span>
+        <div class="menu-info">
+          <span class="menu-brand">Carolina Herrera</span>
+          <h3>212 VIP</h3>
+          <span class="menu-note">Champanhe · Damasco · Almíscar</span>
+        </div>
+        <a class="menu-cta" href="https://wa.me/5549999427624?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20212%20VIP%2C%20da%20Carolina%20Herrera." target="_blank" rel="noopener">Pedir<span class="stroke"></span></a>
       </div>
-
-      <!-- as notas emergem junto ao frasco, uma de cada vez, marcadas por
-           um numeral fino (I/II/III) no lugar do antigo diagrama de pirâmide -->
-      <div class="pyramid-notes-scrim"></div>
-      <div class="pyramid-copy">
-        <div class="tier" id="tierTopo">
-          <span class="tier-num">I</span>
-          <span class="eyebrow">Notas de Topo</span>
-          <div class="n-name">Amêndoa &amp; Café</div>
-          <div class="n-tag">Intrigante</div>
+      <div class="menu-row">
+        <span class="idx">Nº 03</span>
+        <div class="menu-info">
+          <span class="menu-brand">Chloé</span>
+          <h3>Chloé Eau de Parfum</h3>
+          <span class="menu-note">Peônia · Lichia · Almíscar Rosado</span>
         </div>
-        <div class="tier" id="tierCoracao">
-          <span class="tier-num">II</span>
-          <span class="eyebrow">Notas de Coração</span>
-          <div class="n-name">Jasmim &amp; Tuberosa</div>
-          <div class="n-tag">Sedutora</div>
+        <a class="menu-cta" href="https://wa.me/5549999427624?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Chlo%C3%A9%20Eau%20de%20Parfum." target="_blank" rel="noopener">Pedir<span class="stroke"></span></a>
+      </div>
+      <div class="menu-row">
+        <span class="idx">Nº 04</span>
+        <div class="menu-info">
+          <span class="menu-brand">Valentino</span>
+          <h3>Born in Roma</h3>
+          <span class="menu-note">Bergamota · Framboesa · Almíscar</span>
         </div>
-        <div class="tier" id="tierFundo">
-          <span class="tier-num">III</span>
-          <span class="eyebrow">Notas de Fundo</span>
-          <div class="n-name">Fava-tonca &amp; Cacau</div>
-          <div class="n-tag">Marcante</div>
+        <a class="menu-cta" href="https://wa.me/5549999427624?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Born%20in%20Roma%2C%20da%20Valentino." target="_blank" rel="noopener">Pedir<span class="stroke"></span></a>
+      </div>
+      <div class="menu-row">
+        <span class="idx">Nº 05</span>
+        <div class="menu-info">
+          <span class="menu-brand">Zadig &amp; Voltaire</span>
+          <h3>This is Her!</h3>
+          <span class="menu-note">Framboesa · Flor de Cerejeira · Almíscar</span>
         </div>
+        <a class="menu-cta" href="https://wa.me/5549999427624?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20This%20is%20Her%2C%20da%20Zadig%20%26%20Voltaire." target="_blank" rel="noopener">Pedir<span class="stroke"></span></a>
       </div>
     </div>
-
-    <div class="pyramid-meter">
-      <span>a pirâmide</span>
-      <div class="track"><div class="fill" id="pyramidMeterFill"></div></div>
-    </div>
+    <p class="menu-more">Não encontrou o que procura? <a href="https://wa.me/5549999427624" target="_blank" rel="noopener">Consulte o catálogo completo pelo WhatsApp</a>.</p>
   </div>
 </section>
 
@@ -664,6 +580,7 @@ const io = new IntersectionObserver(es => {
     e.target.classList.add('inview'); io.unobserve(e.target);
   }});
 },{threshold:.18});
+document.querySelectorAll('.menu-row').forEach((el,i)=>{el.dataset.d=i*90;io.observe(el)});
 document.querySelectorAll('.brand-row').forEach((el,i)=>{el.dataset.d=i*90;io.observe(el)});
 document.querySelectorAll('.kit').forEach((el,i)=>{el.dataset.d=i*130;io.observe(el)});
 document.querySelectorAll('.colecao-card').forEach((el,i)=>{el.dataset.d=i*100;io.observe(el)});
@@ -707,7 +624,6 @@ function initDust(canvasId){
   }
 }
 initDust('dustCanvas');
-initDust('pyramidDust');
 
 /* ---------- pétalas: camada reativa sobre o vídeo do borrifo ---------- */
 const petalC = document.getElementById('petalCanvas');
@@ -789,13 +705,15 @@ if(!reduced && window.gsap){
   heroTl.to(['.hero-logo','.hero h1','.hero .sub','.hero-actions'],
     {opacity:0,y:-24,duration:.1,stagger:.015},.30);
 
-  /* 74–100% — o "gatilho": um pulso de luz, e a névoa dourada nasce e cobre a tela —
-     essa é a ponte que continua exatamente igual no início da Pirâmide */
+  /* 74–100% — o "gatilho": um pulso de luz, a névoa dourada nasce, cobre a tela
+     e se dissolve de novo antes do fim — a seção seguinte (Menu) é uma lista
+     calma, sem pin, então não precisa de handoff pra outra névoa */
   heroTl.fromTo('#heroMistFlash',{opacity:0,scale:.4},{opacity:1,scale:1.1,duration:.05,ease:'power2.out'},.74);
   heroTl.to('#heroMistFlash',{opacity:0,duration:.08},.79);
-  heroTl.fromTo('#heroMist1',{scale:0,opacity:0},{scale:1.3,opacity:.95,duration:.24,ease:'power1.out'},.76);
-  heroTl.fromTo('#heroMist2',{scale:0,opacity:0},{scale:1.55,opacity:.85,duration:.22,ease:'power1.out'},.78);
-  heroTl.fromTo('#heroMist3',{scale:0,opacity:0},{scale:1.85,opacity:.95,duration:.2,ease:'power1.out'},.80);
+  heroTl.fromTo('#heroMist1',{scale:0,opacity:0},{scale:1.3,opacity:.95,duration:.18,ease:'power1.out'},.76);
+  heroTl.fromTo('#heroMist2',{scale:0,opacity:0},{scale:1.55,opacity:.85,duration:.16,ease:'power1.out'},.78);
+  heroTl.fromTo('#heroMist3',{scale:0,opacity:0},{scale:1.85,opacity:.95,duration:.14,ease:'power1.out'},.80);
+  heroTl.to(['#heroMist1','#heroMist2','#heroMist3'],{opacity:0,duration:.08,ease:'power1.in'},.92);
 }else{
   /* sem scroll-scrub (reduced-motion ou GSAP indisponível): o vídeo toca sozinho em loop */
   const heroVideo = document.getElementById('heroVideo');
@@ -803,92 +721,6 @@ if(!reduced && window.gsap){
   document.querySelectorAll('.hero-logo,.hero h1,.hero .sub,.hero-actions').forEach(el=>{el.style.opacity=1});
   const scrollHint = document.getElementById('scrollHint');
   if(scrollHint) scrollHint.style.display='none';
-}
-
-/* ---------- SEÇÃO 2: a pirâmide olfativa desce enquanto rola ---------- */
-if(!reduced && window.gsap){
-  gsap.registerPlugin(ScrollTrigger);
-
-  /* o frasco e a pirâmide-fantasma se centralizam via CSS transform;
-     fixamos esse centro no cache do GSAP ANTES de qualquer tween tocar
-     essas transforms, senão a primeira animação (rotationY/scale) apaga
-     a centralização — mesma pegadinha do translateX(-50%) já documentada
-     neste projeto */
-  gsap.set('#bottleStage',{xPercent:-50,yPercent:-50});
-  gsap.set('#pyramidTitle',{xPercent:-50});
-
-  const pyTl = gsap.timeline({
-    scrollTrigger:{
-      trigger:'#notas',
-      start:'top top',
-      end:'bottom bottom',
-      scrub:1              // ritmo elegante, sem vídeo pra "seguir" — pode ser mais lento
-    },
-    defaults:{ease:'none'}
-  });
-
-  /* 0–22% — continuação exata da névoa que nasceu no fim do Hero: já entra
-     cobrindo a tela e se dissolve — a seção "nasce" da anterior, não troca */
-  gsap.set(['#pyMist1'],{scale:1.3,opacity:.95});
-  gsap.set(['#pyMist2'],{scale:1.55,opacity:.85});
-  gsap.set(['#pyMist3'],{scale:1.85,opacity:.95});
-  pyTl.to('#pyMist1',{scale:0,opacity:0,duration:.2,ease:'power1.in'},0);
-  pyTl.to('#pyMist2',{scale:0,opacity:0,duration:.18,ease:'power1.in'},.02);
-  pyTl.to('#pyMist3',{scale:0,opacity:0,duration:.16,ease:'power1.in'},.04);
-
-  /* 0–20% — entrada: o frasco sobe e cresce no centro do palco enquanto o
-     título nasce atrás dele — uma cena só, não elementos entrando cada um
-     por conta própria */
-  pyTl.fromTo('#bottleStage',
-    {opacity:0,y:70,scale:.82,xPercent:-50,yPercent:-50},
-    {opacity:1,y:0,scale:1,xPercent:-50,yPercent:-50,duration:.2,ease:'power2.out'},.02);
-  pyTl.fromTo('#pyramidTitle',
-    {opacity:0,y:-16,xPercent:-50},
-    {opacity:1,y:0,xPercent:-50,duration:.16,ease:'power2.out'},.04);
-
-  /* o frasco já gira desde o início — o giro atravessa a entrada e continua
-     até o fim da seção, como um produto girando devagar numa vitrine
-     (rotação 3D vai na <div> que envolve o SVG — em SVG/IMG puro o
-     rotationY do GSAP não tem efeito nenhum). O brilho da própria foto
-     acompanha o giro: mais luminoso de frente, mais discreto de perfil */
-  const bottleImg = document.getElementById('bottleSvg');
-  pyTl.fromTo('#bottleStage',{rotationY:-20},{rotationY:20,duration:1,ease:'none',
-    onUpdate:function(){
-      const rot = gsap.getProperty('#bottleStage','rotationY');
-      const t = (rot+20)/40; // 0..1
-      bottleImg.style.filter = 'brightness(' + (1 + .14*Math.sin(t*Math.PI)) + ') drop-shadow(0 40px 70px rgba(0,0,0,.5))';
-    }
-  },0);
-
-  /* oscilação contínua e sutil, independente do scroll — dá vida ao frasco parado */
-  gsap.to('#bottleStage',{rotation:1.2,transformOrigin:'50% 90%',duration:3.4,
-    yoyo:true,repeat:-1,ease:'sine.inOut'});
-
-  /* entrada da atmosfera: a poça de luz do "palco" e o halo da pirâmide
-     acendem junto com o frasco e as notas — tudo nasce como uma cena só */
-  pyTl.fromTo('#stageGlow',{opacity:0},{opacity:1,duration:.22},.02);
-
-  /* 14–32% — Notas de Topo, reveladas já com a névoa dissolvida */
-  pyTl.fromTo('#tierTopo',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.14);
-  pyTl.to('#tierTopo',{opacity:0,y:-18,duration:.08},.32);
-
-  /* 36–60% — Notas de Coração */
-  pyTl.fromTo('#tierCoracao',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.36);
-  pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(216,176,154,.18), transparent 55%)',duration:.2},.36);
-  pyTl.to('#tierCoracao',{opacity:0,y:-18,duration:.08},.60);
-
-  /* 68–100% — Notas de Fundo: permanece, como o rastro que dura mais na pele */
-  pyTl.fromTo('#tierFundo',{opacity:0,y:24,scale:.94},{opacity:1,y:0,scale:1,duration:.1},.68);
-  pyTl.to('#pyramidGlow',{background:'radial-gradient(circle, rgba(201,164,92,.2), transparent 55%)',duration:.2},.68);
-
-  gsap.to('#pyramidMeterFill',{height:'100%',scrollTrigger:{
-    trigger:'#notas',start:'top top',end:'bottom bottom',scrub:true}});
-}else{
-  document.getElementById('pyramidTitle').style.opacity=1;
-  document.getElementById('bottleStage').style.opacity=1;
-  document.getElementById('stageGlow').style.opacity=1;
-  /* cada nota revela na sua vez ao entrar na tela, em vez de tudo de uma vez */
-  document.querySelectorAll('.pyramid-copy .tier').forEach((el,i)=>{el.dataset.d=i*120;io.observe(el)});
 }
 
 /* ---------- ATO: vídeo real escrubado pelo scroll ---------- */
