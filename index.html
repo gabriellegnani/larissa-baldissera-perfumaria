@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Larissa Baldissera Perfumaria — Alta Perfumaria em Videira, SC</title>
+<meta name="description" content="Alta perfumaria importada e original em Videira, SC. Curadoria pessoal das maisons mais desejadas do mundo — Carolina Herrera, Chloé, Valentino e mais — com entrega para todo o Brasil via WhatsApp.">
+<link rel="icon" href="assets/logo-circle.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -17,6 +21,9 @@
   --line:rgba(201,164,92,.28);
 }
 *{margin:0;padding:0;box-sizing:border-box}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px}
+.skip-link{position:absolute;left:16px;top:-60px;background:var(--gold-2);color:var(--navy);padding:12px 22px;z-index:999;font-size:.78rem;letter-spacing:.08em;border-radius:2px;transition:top .25s ease}
+.skip-link:focus{top:16px}
 body{
   background:var(--navy);
   color:var(--ivory);
@@ -40,7 +47,7 @@ a{color:inherit;text-decoration:none}
 .progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:100}
 
 /* NAV */
-header{position:fixed;top:0;left:0;right:0;z-index:90;padding:26px 0;transition:.45s ease}
+header{position:fixed;top:0;left:0;right:0;z-index:93;padding:26px 0;transition:.45s ease}
 header.scrolled{padding:14px 0;background:rgba(14,13,36,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 nav.wrap{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:14px}
@@ -59,8 +66,31 @@ header.scrolled .brand img{width:36px;height:36px}
 .nav-cta:hover::before{width:40px}
 .nav-cta::after{display:none}
 
+.nav-toggle{display:none;position:relative;width:30px;height:22px;background:none;border:none;padding:0;cursor:pointer;z-index:92}
+.nav-toggle span{position:absolute;left:0;right:0;height:1px;background:var(--ivory);transition:transform .35s ease,opacity .25s ease}
+.nav-toggle span:nth-child(1){top:0}
+.nav-toggle span:nth-child(2){top:50%;transform:translateY(-50%)}
+.nav-toggle span:nth-child(3){bottom:0}
+.nav-toggle.open span:nth-child(1){transform:translateY(10.5px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-10.5px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;top:0;right:0;height:100vh;width:min(320px,78vw);z-index:91;
+  background:rgba(14,13,36,.98);backdrop-filter:blur(14px);
+  border-left:1px solid var(--line);
+  display:flex;flex-direction:column;gap:6px;padding:110px 36px 40px;
+  transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;padding:16px 0;border-bottom:1px solid var(--line);opacity:.85}
+.mobile-menu a:hover,.mobile-menu a:focus-visible{opacity:1}
+.mobile-menu a.nav-cta{color:var(--gold-2)!important;border-bottom:none;margin-top:10px}
+.menu-scrim{position:fixed;inset:0;z-index:89;background:rgba(14,13,36,.55);opacity:0;pointer-events:none;transition:opacity .35s ease}
+.menu-scrim.open{opacity:1;pointer-events:auto}
+
 /* HERO: vídeo real (frasco emerge da escuridão e pousa no líquido), guiado pelo scroll */
-.hero{position:relative;z-index:2;height:400vh}
+.hero{position:relative;z-index:2;height:260vh}
 .hero-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
 .hero-bg{position:absolute;inset:0;background:
   radial-gradient(ellipse 70% 55% at 50% 118%, rgba(201,164,92,.16), transparent 60%),
@@ -139,15 +169,15 @@ header.scrolled .brand img{width:36px;height:36px}
 .menu-row .idx{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1rem}
 .menu-brand{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);display:block}
 .menu-info h3{font-size:clamp(1.4rem,2.4vw,1.9rem);margin-top:6px}
-.menu-note{font-size:.68rem;letter-spacing:.16em;color:rgba(246,241,231,.5);display:block;margin-top:8px}
-.menu-cta{display:inline-flex;align-items:center;gap:14px;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-2);white-space:nowrap}
+.menu-note{font-size:.68rem;letter-spacing:.16em;color:rgba(246,241,231,.64);display:block;margin-top:8px}
+.menu-cta{display:inline-flex;align-items:center;gap:14px;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-2);white-space:nowrap;padding:16px 6px;margin:-16px -6px}
 .menu-cta .stroke{display:inline-block;width:32px;height:1px;background:var(--gold);transition:width .4s ease}
 .menu-cta:hover .stroke{width:52px}
 .menu-more{text-align:center;margin-top:50px;color:rgba(246,241,231,.6);font-size:.92rem}
 .menu-more a{color:var(--gold-2);text-decoration:underline;text-underline-offset:4px}
 
 /* ============ ATO: O BORRIFO (vídeo real) ============ */
-.act{position:relative;z-index:2;height:520vh}
+.act{position:relative;z-index:2;height:340vh}
 .act-pin{position:sticky;top:0;height:100vh;overflow:hidden}
 .act-bg{position:absolute;inset:0;background:linear-gradient(175deg,#0e0d24,#14123a 55%,#0e0d24)}
 /* vídeo real, escrubado pelo scroll */
@@ -202,7 +232,7 @@ header.scrolled .brand img{width:36px;height:36px}
 .brand-row:hover{background:rgba(201,164,92,.06);padding-left:26px}
 .brand-row .idx{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1rem}
 .brand-row h3{font-size:clamp(1.5rem,2.6vw,2.2rem)}
-.brand-row .note-txt{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(246,241,231,.5)}
+.brand-row .note-txt{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(246,241,231,.64)}
 
 .colecao{position:relative;z-index:2;padding:140px 0}
 .colecao-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
@@ -212,19 +242,17 @@ header.scrolled .brand img{width:36px;height:36px}
 .colecao-card.filled::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .colecao-brand{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
 .colecao-card h3{font-size:1.7rem;margin-bottom:14px}
-.colecao-note{font-size:.68rem;letter-spacing:.16em;color:rgba(246,241,231,.55);display:block;margin-bottom:26px}
+.colecao-note{font-size:.68rem;letter-spacing:.16em;color:rgba(246,241,231,.65);display:block;margin-bottom:26px}
 .colecao-cta{
   display:inline-flex;align-items:center;gap:14px;align-self:flex-start;
   font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-2);
+  padding:16px 6px;margin:-16px -6px;
 }
 .colecao-cta .stroke{display:inline-block;width:32px;height:1px;background:var(--gold);transition:width .4s ease}
 .colecao-cta:hover .stroke{width:52px}
-.colecao-card.empty{
-  align-items:center;text-align:center;border:1px dashed rgba(201,164,92,.22);
-  background:transparent;
-}
-.colecao-card.empty span{
-  font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(246,241,231,.32);
+.colecao-card.cta-card{
+  grid-column:span 2;border:1px dashed rgba(201,164,92,.35);
+  background:linear-gradient(175deg,var(--navy),var(--navy-2));
 }
 
 .kits{position:relative;z-index:2;padding:140px 0}
@@ -247,7 +275,9 @@ header.scrolled .brand img{width:36px;height:36px}
 .info-list li:first-child{border-top:1px solid var(--line)}
 .info-list .k{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);width:90px;flex-shrink:0;padding-top:4px}
 .info-list .v{font-size:1.02rem;color:rgba(246,241,231,.85)}
-.info-list .v small{display:block;color:rgba(246,241,231,.5);font-size:.82rem;margin-top:4px}
+.info-list .v small{display:block;color:rgba(246,241,231,.62);font-size:.82rem;margin-top:4px}
+.info-list .v a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(201,164,92,.5)}
+.info-list .v a:hover,.info-list .v a:focus-visible{color:var(--gold-2)}
 .loja-directions{display:inline-flex;margin-top:14px;font-size:.64rem}
 .loja-visual{position:relative;display:flex;justify-content:center}
 .loja-visual .orbit{width:min(400px,80vw);height:min(400px,80vw);border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;animation:spinSlow 80s linear infinite reverse}
@@ -264,7 +294,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
 .foot-brand{display:flex;align-items:center;gap:12px}
 .foot-brand img{width:34px;height:34px}
 .foot-brand span{font-family:'Cormorant Garamond',serif;letter-spacing:.2em;text-transform:uppercase;font-size:.8rem}
-.foot small{color:rgba(246,241,231,.4);font-size:.74rem}
+.foot small{color:rgba(246,241,231,.56);font-size:.74rem}
 
 .wa{position:fixed;bottom:28px;right:28px;z-index:95;width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(0,0,0,.35);font-size:1.35rem;transition:transform .3s}
 .wa:hover{transform:scale(1.1)}
@@ -272,14 +302,22 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
 @media(max-width:920px){
   .wrap{padding:0 26px}
   .navlinks{display:none}
+  .nav-toggle{display:block}
   .act-meter{right:18px}
   .kit-grid{grid-template-columns:1fr}
   .colecao-grid{grid-template-columns:1fr}
+  .colecao-card.cta-card{grid-column:auto}
   .loja-grid{grid-template-columns:1fr;gap:50px}
   .brand-row{grid-template-columns:44px 1fr;gap:16px}
   .brand-row .note-txt{display:none}
   .menu-row{grid-template-columns:44px 1fr;gap:16px}
   .menu-cta{grid-column:1/-1;margin-top:16px}
+  .hero-video-wrap video,.act-video-wrap video{object-fit:contain}
+  .hero-scrim{background:
+    linear-gradient(180deg, rgba(14,13,36,.55) 0%, rgba(14,13,36,.35) 20%, rgba(14,13,36,.6) 45%, rgba(14,13,36,.8) 75%, rgba(14,13,36,.92) 100%);
+  }
+  .foot{flex-direction:column;align-items:flex-start;gap:14px}
+  footer{padding-bottom:110px}
 }
 @media (prefers-reduced-motion: reduce){
   .grain,.hero-halo,.loja-visual .orbit,.loja-visual img{animation:none!important}
@@ -295,6 +333,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
 </head>
 <body>
 
+<a href="#top" class="skip-link">Pular para o conteúdo</a>
 <div class="grain"></div>
 <div class="progress" id="progress"></div>
 
@@ -313,20 +352,33 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
       <a href="#loja">A Loja</a>
       <a class="nav-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">WhatsApp</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 </header>
+<div class="menu-scrim" id="menuScrim"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menu principal (mobile)">
+  <a href="#menu">Menu</a>
+  <a href="#experiencia">A Experiência</a>
+  <a href="#marcas">Maisons</a>
+  <a href="#colecao">Coleção</a>
+  <a href="#kits">Presentes</a>
+  <a href="#loja">A Loja</a>
+  <a class="nav-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">WhatsApp</a>
+</nav>
 
 <section class="hero" id="top">
   <div class="hero-pin">
     <div class="hero-bg"></div>
     <div class="hero-video-wrap">
-      <video id="heroVideo" src="assets/video/hero-frasco-liquido.mp4" poster="assets/video/hero-poster.jpg" muted playsinline preload="auto"></video>
+      <video id="heroVideo" src="assets/video/hero-frasco-liquido.mp4" poster="assets/video/hero-poster.jpg" muted playsinline preload="auto" aria-hidden="true"></video>
     </div>
     <div class="hero-scrim"></div>
     <div class="hero-halo"><span class="dot"></span></div>
     <div class="hero-inner wrap" id="heroInner">
       <img class="hero-logo" src="assets/logo-circle.png" alt="Selo Larissa Baldissera">
-      <h1>A arte de vestir<br><em>uma fragrância</em></h1>
+      <h1>A arte de vestir<br> <em>uma fragrância</em></h1>
       <p class="sub">Alta perfumaria com curadoria pessoal. As maisons mais desejadas do mundo, escolhidas frasco a frasco em Videira — entregues em todo o Brasil.</p>
       <div class="hero-actions">
         <a class="btn btn-gold" href="https://wa.me/5549999427624" target="_blank" rel="noopener"><span class="stroke"></span>Fazer um pedido</a>
@@ -394,7 +446,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
         <span class="idx">Nº 05</span>
         <div class="menu-info">
           <span class="menu-brand">Zadig &amp; Voltaire</span>
-          <h3>This is Her!</h3>
+          <h3>This is Her</h3>
           <span class="menu-note">Framboesa · Flor de Cerejeira · Almíscar</span>
         </div>
         <a class="menu-cta" href="https://wa.me/5549999427624?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20This%20is%20Her%2C%20da%20Zadig%20%26%20Voltaire." target="_blank" rel="noopener">Pedir<span class="stroke"></span></a>
@@ -411,7 +463,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
 
     <!-- vídeo real: frasco, borrifo e pétalas — escrubado pelo scroll -->
     <div class="act-video-wrap">
-      <video id="actVideo" src="assets/video/borrifo-petalas.mp4" poster="assets/video/borrifo-poster.jpg" muted playsinline preload="auto"></video>
+      <video id="actVideo" src="assets/video/borrifo-petalas.mp4" poster="assets/video/borrifo-poster.jpg" muted playsinline preload="metadata" aria-hidden="true"></video>
     </div>
     <div class="act-scrim"></div>
 
@@ -423,7 +475,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
     <!-- textos -->
     <div class="act-copy top" id="actIntro">
       <span class="eyebrow">A Experiência</span>
-      <h2>Um perfume não se explica.<br><em>Se sente.</em></h2>
+      <h2>Um perfume não se explica.<br> <em>Se sente.</em></h2>
     </div>
 
     <div class="act-copy" id="actGesture">
@@ -432,7 +484,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
 
     <div class="act-copy top" id="actFinale">
       <span class="eyebrow">O Rastro</span>
-      <h2>O que fica no ar<br><em>é quem você é</em></h2>
+      <h2>O que fica no ar<br> <em>é quem você é</em></h2>
     </div>
 
     <div class="act-meter">
@@ -474,11 +526,12 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
         <span class="colecao-note">Amêndoa · Jasmim · Fava-tonca</span>
         <a class="colecao-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">Consultar<span class="stroke"></span></a>
       </div>
-      <div class="colecao-card empty"><span>Em breve</span></div>
-      <div class="colecao-card empty"><span>Em breve</span></div>
-      <div class="colecao-card empty"><span>Em breve</span></div>
-      <div class="colecao-card empty"><span>Em breve</span></div>
-      <div class="colecao-card empty"><span>Em breve</span></div>
+      <div class="colecao-card cta-card">
+        <span class="colecao-brand">Em constante curadoria</span>
+        <h3>Mais lançamentos a caminho</h3>
+        <span class="colecao-note">Esta é uma amostra — o catálogo completo é maior e é atualizado direto pelo WhatsApp. Pergunte pelo perfume que você procura.</span>
+        <a class="colecao-cta" href="https://wa.me/5549999427624" target="_blank" rel="noopener">Falar com a Larissa<span class="stroke"></span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -508,8 +561,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:46px
           <a class="btn btn-line loja-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=R.+Victor+Meirelles+-+Matriz,+Videira+-+SC,+89600-000" target="_blank" rel="noopener"><span class="stroke"></span>Como chegar</a>
         </span></li>
         <li><span class="k">WhatsApp</span><span class="v">(49) 99942-7624<small>Atendimento pessoal e envio para todo o país</small></span></li>
-        <li><span class="k">Instagram</span><span class="v">@larissabaldisseraperfumaria<small>Lançamentos e novidades em primeira mão</small></span></li>
-        <li><span class="k">E-mail</span><span class="v">lah.baldissera@hotmail.com</span></li>
+        <li><span class="k">Instagram</span><span class="v"><a href="https://www.instagram.com/larissabaldisseraperfumaria/" target="_blank" rel="noopener">@larissabaldisseraperfumaria</a><small>Lançamentos e novidades em primeira mão</small></span></li>
+        <li><span class="k">E-mail</span><span class="v"><a href="mailto:lah.baldissera@hotmail.com">lah.baldissera@hotmail.com</a></span></li>
       </ul>
     </div>
     <div class="loja-visual">
@@ -564,6 +617,30 @@ if(!reduced){
   };
   document.head.appendChild(lenisScript);
 }
+
+/* menu mobile: sem isso o menu inteiro (Menu/Experiência/Maisons/...)
+   simplesmente sumia em telas pequenas, sem nenhum substituto */
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuScrim = document.getElementById('menuScrim');
+function closeMobileMenu(){
+  mobileMenu.classList.remove('open');
+  navToggle.classList.remove('open');
+  menuScrim.classList.remove('open');
+  navToggle.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+navToggle.addEventListener('click', () => {
+  const willOpen = !mobileMenu.classList.contains('open');
+  mobileMenu.classList.toggle('open', willOpen);
+  navToggle.classList.toggle('open', willOpen);
+  menuScrim.classList.toggle('open', willOpen);
+  navToggle.setAttribute('aria-expanded', String(willOpen));
+  document.body.style.overflow = willOpen ? 'hidden' : '';
+});
+menuScrim.addEventListener('click', closeMobileMenu);
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+addEventListener('keydown', e => { if(e.key === 'Escape') closeMobileMenu(); });
 
 /* header + progress */
 const hdr = document.getElementById('hdr');
@@ -678,6 +755,16 @@ if(!reduced && window.gsap){
 
   const heroVideo = document.getElementById('heroVideo');
 
+  /* marca, headline e CTAs: entram uma vez ao carregar a página, num
+     timeline PRÓPRIO e independente do scroll. Antes essa entrada vivia
+     dentro do timeline scrubado abaixo (progresso 0 = opacity 0), então
+     quem não rolasse a página — ou rolasse rápido demais — nunca via o
+     H1, o parágrafo e os botões de CTA, o conteúdo mais importante do hero. */
+  gsap.timeline({defaults:{ease:'power2.out'}})
+    .fromTo(['.hero-logo','.hero h1','.hero .sub','.hero-actions'],
+      {opacity:0,y:26},
+      {opacity:1,y:0,duration:1,stagger:.12});
+
   const heroTl = gsap.timeline({
     scrollTrigger:{
       trigger:'#top',
@@ -692,11 +779,6 @@ if(!reduced && window.gsap){
   heroTl.to({v:0},{v:1,duration:1,onUpdate:function(){
     if(heroVideo.readyState >= 1) heroVideo.currentTime = this.targets()[0].v * heroVideo.duration;
   }},0);
-
-  /* 0–12% — marca e headline entram */
-  heroTl.fromTo(['.hero-logo','.hero h1','.hero .sub','.hero-actions'],
-    {opacity:0,y:26},
-    {opacity:1,y:0,duration:.06,stagger:.02,ease:'power2.out'},0);
 
   /* a dica "role para sentir" some assim que o usuário começa a rolar */
   heroTl.to('#scrollHint',{opacity:0,duration:.04},.02);
