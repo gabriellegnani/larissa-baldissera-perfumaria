@@ -750,10 +750,21 @@ if(!reduced){
 }
 
 /* ---------- HERO: vídeo real escrubado pelo scroll ---------- */
+/* "primeVideo": em vários navegadores (Safari/iOS sobretudo), um vídeo
+   controlado só via currentTime — sem nunca dar play() — não decodifica
+   nenhum frame, ficando invisível (mostra o fundo por trás) até o usuário
+   rolar o bastante pra "forçar" o primeiro frame. Um play()+pause() logo
+   no carregamento resolve, decodificando o frame inicial de antemão. */
+function primeVideo(video){
+  const p = video.play();
+  if(p && p.catch) p.then(()=>video.pause()).catch(()=>{});
+}
+
 if(!reduced && window.gsap){
   gsap.registerPlugin(ScrollTrigger);
 
   const heroVideo = document.getElementById('heroVideo');
+  primeVideo(heroVideo);
 
   /* marca, headline e CTAs: entram uma vez ao carregar a página, num
      timeline PRÓPRIO e independente do scroll. Antes essa entrada vivia
@@ -810,6 +821,7 @@ if(!reduced && window.gsap){
   gsap.registerPlugin(ScrollTrigger);
 
   const actVideo = document.getElementById('actVideo');
+  primeVideo(actVideo);
 
   const tl = gsap.timeline({
     scrollTrigger:{
